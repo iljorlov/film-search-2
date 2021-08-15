@@ -16,6 +16,7 @@ export const Film: FC<FilmProps> = ({title, vote_average, poster_path, release_d
 
   const [isHovered, setIsHovered] = useState(false)
   const cardAnimation = {}
+  
 
   return (
     <StyledFilm
@@ -34,25 +35,22 @@ export const Film: FC<FilmProps> = ({title, vote_average, poster_path, release_d
             bottom: isHovered ? '0rem' : '10rem',
           }
         }
-        
         transition={{duration: 0.2}}
       />
       <Description 
         className="description"
         >
         <motion.h5
-          animate={{
-            color: isHovered ? 'white' : '#333'
+          style={{
+            color: `${isHovered ? 'white' : '#333'}`
           }}
-          transition={{duration: 0.1}}
         >
           {title}
         </motion.h5>
         <motion.p
-          animate={{
-            color: isHovered ? 'white' : 'initial'
+          style={{
+            color: `${isHovered ? 'white' : '#333'}`
           }}
-          transition={{duration: 0.1}}
         >
           {vote_average}/10
         </motion.p>

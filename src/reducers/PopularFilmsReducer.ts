@@ -1,4 +1,4 @@
-import { PopularFilmsDispatchTypes, POPULAR_FILMS_FAIL, POPULAR_FILMS_SUCCESS, POPULAR_FILMS_LOADING, FetchedPopularFilmsType } from "../actions/PopularFilmsActionTypes"
+import { PopularFilmsDispatchTypes, POPULAR_FILMS_FAIL, POPULAR_FILMS_SUCCESS, POPULAR_FILMS_LOADING, FetchedPopularFilmsType } from "../actions/PopularFilms/PopularFilmsActionTypes"
 
 interface DefaultStateI{
   loading: boolean,

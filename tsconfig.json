@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/actions/.Trending", "src/actions/.Trending"  ]
 }

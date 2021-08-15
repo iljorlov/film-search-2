@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
     }
     h2{
         font-size: 3rem;
-        font-family: 'Abril Fatface', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: lighter;
         color: #333;
     }

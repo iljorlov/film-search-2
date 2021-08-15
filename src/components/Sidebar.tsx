@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 interface SidebarProps {
   sidebarToggle: boolean
@@ -19,15 +19,21 @@ export const Sidebar: FC<SidebarProps> = ({sidebarToggle}) => {
       }
       transition={{
           type: 'tween',
-          duration: 0.2
+          duration: 0.3
         }}
     >
-      <Link to={'/popular'}>
+      <NavLink to={'/popular/1'}>
         <SidebarLink>Popular</SidebarLink>
-      </Link>
-      <Link to={'/popular'}>
+      </NavLink>
+      <NavLink to={'/top-rated/1'}>
         <SidebarLink>Top Rated</SidebarLink>
-      </Link>
+      </NavLink>
+      <NavLink to={'/trending/1'}>
+        <SidebarLink>Trending</SidebarLink>
+      </NavLink>
+      <NavLink to={'/upcoming/1'}>
+        <SidebarLink>Upcoming</SidebarLink>
+      </NavLink>
       
 
     </SidebarComponent>
@@ -48,7 +54,6 @@ const SidebarComponent = styled(motion.div)`
 
 const SidebarLink = styled(motion.div)`
   color: white;
-  margin-top: 1rem;
-  
+  margin: 2rem 1rem;
 `
 

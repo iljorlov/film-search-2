@@ -35,4 +35,5 @@ export type FilmType = {
 export type FetchedPopularFilmsType = {
   page: number
   results: FilmType[]
+  total_pages: number
 }

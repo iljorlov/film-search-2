@@ -1,34 +1,41 @@
-import { TopRatedFilmsDispatchTypes, TOP_RATED_FILMS_FAIL, TOP_RATED_FILMS_SUCCESS, TOP_RATED_FILMS_LOADING, FetchedTopRatedFilmsType } from "../actions/TopRatedFilms/TopRatedFilmsActionTypes"
+import {
+  TopRatedFilmsDispatchTypes,
+  TOP_RATED_FILMS_FAIL,
+  TOP_RATED_FILMS_SUCCESS,
+  TOP_RATED_FILMS_LOADING,
+  FetchedTopRatedFilmsType,
+} from "../actions/TopRatedFilms/TopRatedFilmsActionTypes";
 
-
-interface DefaultStateI{
-  loading: boolean,
-  topRated?: FetchedTopRatedFilmsType
+interface DefaultStateI {
+  loading: boolean;
+  topRated?: FetchedTopRatedFilmsType;
 }
 
 const defaultState: DefaultStateI = {
-  loading: false
-}
+  loading: false,
+};
 
-const topRatedFilmsReducer = (state: DefaultStateI = defaultState, action: TopRatedFilmsDispatchTypes): DefaultStateI => {
+const topRatedFilmsReducer = (
+  state: DefaultStateI = defaultState,
+  action: TopRatedFilmsDispatchTypes
+): DefaultStateI => {
   switch (action.type) {
     case TOP_RATED_FILMS_FAIL:
       return {
-        loading: false
-      }
+        loading: false,
+      };
     case TOP_RATED_FILMS_LOADING:
       return {
-        loading: true
-      }
+        loading: true,
+      };
     case TOP_RATED_FILMS_SUCCESS:
       return {
         loading: false,
-        topRated: action.payload
-      }
+        topRated: action.payload,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-
-export default topRatedFilmsReducer 
+export default topRatedFilmsReducer;

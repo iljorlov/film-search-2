@@ -2,6 +2,8 @@ import { combineReducers } from "redux";
 import creditsReducer from "./CreditsReducer";
 import postersReducer from "./ImagesReducer";
 import individualFilmReducer from "./IndividualFilmReducer";
+import RootPersonReducer from "./IndividualPersonReducers/RootPersonReducer";
+import individualTVReducer from "./IndividualTVReducers/IndividualTVReducer";
 import popularFilmsReducer from "./PopularFilmsReducer";
 import recommendedFilmsReducer from "./RecommendedFilmsReducer";
 import topRatedFilmsReducer from "./TopRatedFilmsReduces";
@@ -21,6 +23,8 @@ const RootReducer = combineReducers({
   posters: postersReducer,
   credits: creditsReducer,
   recommendedFilms: recommendedFilmsReducer,
-})
+  individualPerson: RootPersonReducer,
+  individualTV: individualTVReducer,
+});
 
-export default RootReducer
+export default RootReducer;

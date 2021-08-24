@@ -1,41 +1,45 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
-import { FilmType } from '../actions/PopularFilms/PopularFilmsActionTypes'
-import { GetTrendingFilms } from '../actions/Trending/TrendingActions'
-import { Film } from '../components/cards/Film'
-import { Pagination } from '../components/Pagination'
-import { RootStore } from '../Store'
-import { FilmsList, Films } from './Home'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
+import { GetTrendingFilms } from "../actions/Trending/TrendingActions";
+import { Film } from "../components/cards/Film";
+import { Pagination } from "../components/Pagination";
+import { RootStore } from "../Store";
+import { FilmsList, Films } from "./Home";
 
 export const TrendingFilms = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const location = useLocation()
-  const pathCurrentPage = parseInt(location.pathname.split('/')[2])
+  const location = useLocation();
+  const pathCurrentPage = parseInt(location.pathname.split("/")[2]);
 
   useEffect(() => {
-    dispatch(GetTrendingFilms(pathCurrentPage))
-  }, [dispatch, pathCurrentPage])
+    dispatch(GetTrendingFilms(pathCurrentPage));
+  }, [dispatch, pathCurrentPage]);
 
-  const trendingFilms = useSelector((state: RootStore) => state.trendingFilms.trendingFilms)
-  const currentPage = useSelector((state: RootStore) => state.trendingFilms.trendingFilms?.page)
-  const totalPages = useSelector((state: RootStore) => state.trendingFilms.trendingFilms?.total_pages)
+  const trendingFilms = useSelector(
+    (state: RootStore) => state.trendingFilms.trendingFilms
+  );
+  const currentPage = useSelector(
+    (state: RootStore) => state.trendingFilms.trendingFilms?.page
+  );
+  const totalPages = useSelector(
+    (state: RootStore) => state.trendingFilms.trendingFilms?.total_pages
+  );
 
   // const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
   // const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
 
-
-
   return (
     <>
-      { trendingFilms &&
+      {trendingFilms && (
         <>
-          <FilmsList className='page'>
+          <FilmsList className="page">
             <h2>Trending Films: </h2>
             <Films>
-              {trendingFilms?.results.map((film:FilmType) => (
-                <Film 
+              {trendingFilms?.results.map((film: FilmType) => (
+                <Film
                   key={film.id}
                   id={film.id}
                   title={film.title}
@@ -46,9 +50,13 @@ export const TrendingFilms = () => {
               ))}
             </Films>
           </FilmsList>
-          <Pagination currentPage={currentPage} totalPages={totalPages} filtration={'trending_films'}/>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            filtration={"trending_films"}
+          />
         </>
-      }
+      )}
     </>
-  )
-}
+  );
+};

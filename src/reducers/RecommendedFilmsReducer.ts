@@ -1,39 +1,47 @@
-import { RecommendedFilmsDispatchTypes, RECOMMENDED_FILMS_SUCCESS, RECOMMENDED_FILMS_LOADING, RECOMMENDED_FILMS_FAIL, RecommendedFilmsType } from "../actions/IndividualFilm/RecommendedFilmsActionTypes"
+import {
+  RecommendedFilmsDispatchTypes,
+  RECOMMENDED_FILMS_SUCCESS,
+  RECOMMENDED_FILMS_LOADING,
+  RECOMMENDED_FILMS_FAIL,
+  RecommendedFilmsType,
+} from "../actions/IndividualFilm/RecommendedFilmsActionTypes";
 
-interface DefaultStateI{
-  loading: boolean,
-  data?: {[id: number]: RecommendedFilmsType}
+interface DefaultStateI {
+  loading: boolean;
+  data?: { [id: number]: RecommendedFilmsType };
 }
 
 const defaultState: DefaultStateI = {
-  loading: false
-}
+  loading: false,
+};
 
-const recommendedFilmsReducer = (state: DefaultStateI = defaultState, action: RecommendedFilmsDispatchTypes): DefaultStateI => {
+const recommendedFilmsReducer = (
+  state: DefaultStateI = defaultState,
+  action: RecommendedFilmsDispatchTypes
+): DefaultStateI => {
   switch (action.type) {
     case RECOMMENDED_FILMS_FAIL:
       return {
         ...state,
-        loading: false
-      }
+        loading: false,
+      };
     case RECOMMENDED_FILMS_LOADING:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case RECOMMENDED_FILMS_SUCCESS:
       return {
         ...state,
         loading: false,
         data: {
           ...state.data,
-          [action.filmId] : action.payload
-        }
-      }
+          [action.filmId]: action.payload,
+        },
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-
-export default recommendedFilmsReducer 
+export default recommendedFilmsReducer;

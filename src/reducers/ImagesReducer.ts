@@ -1,39 +1,47 @@
-import { ImagesDispatchTypes, IMAGES_SUCCESS, IMAGES_LOADING, IMAGES_FAIL, ImagesType } from "../actions/IndividualFilm/ImagesActionTypes"
+import {
+  ImagesDispatchTypes,
+  IMAGES_SUCCESS,
+  IMAGES_LOADING,
+  IMAGES_FAIL,
+  ImagesType,
+} from "../actions/IndividualFilm/ImagesActionTypes";
 
-interface DefaultStateI{
-  loading: boolean,
-  data?: {[id: number]: ImagesType}
+interface DefaultStateI {
+  loading: boolean;
+  data?: { [id: number]: ImagesType };
 }
 
 const defaultState: DefaultStateI = {
-  loading: false
-}
+  loading: false,
+};
 
-const postersReducer = (state: DefaultStateI = defaultState, action: ImagesDispatchTypes): DefaultStateI => {
+const postersReducer = (
+  state: DefaultStateI = defaultState,
+  action: ImagesDispatchTypes
+): DefaultStateI => {
   switch (action.type) {
     case IMAGES_FAIL:
       return {
         ...state,
-        loading: false
-      }
+        loading: false,
+      };
     case IMAGES_LOADING:
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case IMAGES_SUCCESS:
       return {
         ...state,
         loading: false,
         data: {
           ...state.data,
-          [action.filmId] : action.payload
-        }
-      }
+          [action.filmId]: action.payload,
+        },
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-
-export default postersReducer 
+export default postersReducer;

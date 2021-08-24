@@ -1,41 +1,45 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
-import { FilmType } from '../actions/PopularFilms/PopularFilmsActionTypes'
-import { GetUpcomingFilms } from '../actions/UpcomingFilms/UpcomingFilmsActions'
-import { Film } from '../components/cards/Film'
-import { Pagination } from '../components/Pagination'
-import { RootStore } from '../Store'
-import { FilmsList, Films } from './Home'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
+import { GetUpcomingFilms } from "../actions/UpcomingFilms/UpcomingFilmsActions";
+import { Film } from "../components/cards/Film";
+import { Pagination } from "../components/Pagination";
+import { RootStore } from "../Store";
+import { FilmsList, Films } from "./Home";
 
 export const Upcoming = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const location = useLocation()
-  const pathCurrentPage = parseInt(location.pathname.split('/')[2])
+  const location = useLocation();
+  const pathCurrentPage = parseInt(location.pathname.split("/")[2]);
 
   useEffect(() => {
-    dispatch(GetUpcomingFilms(pathCurrentPage))
-  }, [dispatch, pathCurrentPage])
+    dispatch(GetUpcomingFilms(pathCurrentPage));
+  }, [dispatch, pathCurrentPage]);
 
-  const topRatedFilms = useSelector((state: RootStore) => state.upcomingFilms.upcoming)
-  const currentPage = useSelector((state: RootStore) => state.upcomingFilms.upcoming?.page)
-  const totalPages = useSelector((state: RootStore) => state.upcomingFilms.upcoming?.total_pages)
+  const topRatedFilms = useSelector(
+    (state: RootStore) => state.upcomingFilms.upcoming
+  );
+  const currentPage = useSelector(
+    (state: RootStore) => state.upcomingFilms.upcoming?.page
+  );
+  const totalPages = useSelector(
+    (state: RootStore) => state.upcomingFilms.upcoming?.total_pages
+  );
 
   // const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
   // const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
 
-
-
   return (
     <>
-      { topRatedFilms &&
+      {topRatedFilms && (
         <>
-          <FilmsList className='page'>
+          <FilmsList className="page">
             <h2>Upcoming: </h2>
             <Films>
-              {topRatedFilms?.results.map((film:FilmType) => (
-                <Film 
+              {topRatedFilms?.results.map((film: FilmType) => (
+                <Film
                   key={film.id}
                   title={film.title}
                   vote_average={film.vote_average}
@@ -46,9 +50,13 @@ export const Upcoming = () => {
               ))}
             </Films>
           </FilmsList>
-          <Pagination currentPage={currentPage} totalPages={totalPages} filtration={'upcoming'}/>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            filtration={"upcoming"}
+          />
         </>
-      }
+      )}
     </>
-  )
-}
+  );
+};

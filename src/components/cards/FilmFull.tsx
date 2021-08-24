@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Trending = () => {
+export const FilmFull = () => {
   return (
     <div>
       

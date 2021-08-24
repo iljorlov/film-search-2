@@ -11,6 +11,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({sidebarToggle}) => {
   return (
     <SidebarComponent
+      id='sidebar'
       initial={
         {x: '-100%'}
       }
@@ -22,17 +23,25 @@ export const Sidebar: FC<SidebarProps> = ({sidebarToggle}) => {
           duration: 0.3
         }}
     >
+      <SidebarSection>General:</SidebarSection>
       <NavLink to={'/popular/1'}>
         <SidebarLink>Popular</SidebarLink>
       </NavLink>
-      <NavLink to={'/top-rated/1'}>
+      <NavLink to={'/top_rated/1'}>
         <SidebarLink>Top Rated</SidebarLink>
-      </NavLink>
-      <NavLink to={'/trending/1'}>
-        <SidebarLink>Trending</SidebarLink>
       </NavLink>
       <NavLink to={'/upcoming/1'}>
         <SidebarLink>Upcoming</SidebarLink>
+      </NavLink>
+      <SidebarSection>Trending: </SidebarSection>
+      <NavLink to={'/trending_films/1'}>
+        <SidebarLink>Films</SidebarLink>
+      </NavLink>
+      <NavLink to={'/trending_tvs/1'}>
+        <SidebarLink>TV Shows</SidebarLink>
+      </NavLink>
+      <NavLink to={'/trending_people/1'}>
+        <SidebarLink>People</SidebarLink>
       </NavLink>
       
 
@@ -40,6 +49,11 @@ export const Sidebar: FC<SidebarProps> = ({sidebarToggle}) => {
   )
 }
 
+
+const SidebarSection = styled(motion.div)`
+  border-top: 1px solid rgba(255,255,255,0.4);
+  padding-top: 1rem;
+`
 
 const SidebarComponent = styled(motion.div)`
   width: 20vw;

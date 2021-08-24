@@ -50,7 +50,7 @@ export interface TrendingTvFail {
 }
 export interface TrendingTvSuccess {
   type: typeof TRENDING_TV_SUCCESS,
-  payload: FetchedTrendinTvType
+  payload: FetchedTrendingTvType
 }
 export type TrendingTvDispatchTypes = TrendingTvLoading | TrendingTvFail | TrendingTvSuccess
 
@@ -70,9 +70,9 @@ export type TvType = {
   popularity: number
   media_type: string
 }
-export type FetchedTrendinTvType = {
+export type FetchedTrendingTvType = {
   page: number
-  results: PersonType[]
+  results: TvType[]
   total_pages: number
 }
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { GetPopularFilms } from '../actions/PopularFilms/PopularFilmsActions';
-import { Film } from '../components/Film';
+import { Film } from '../components/cards/Film';
 import { RootStore } from '../Store';
 import { motion } from 'framer-motion';
 import { FilmType } from '../actions/PopularFilms/PopularFilmsActionTypes';
@@ -25,18 +25,18 @@ export const Home = () => {
   const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
   const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
   
-  console.log(`address page num: `, pathCurrentPage)
 
   return (
     <>
       { popularFilms && currentPage && totalPages &&
         <>
-        <FilmsList>
+        <FilmsList className='page'>
           <h2>Popular: </h2>
           <Films>
             {popularFilms?.results.map((film:FilmType) => (
               <Film 
                 key={film.id}
+                id={film.id}
                 title={film.title}
                 vote_average={film.vote_average}
                 poster_path={film.poster_path}

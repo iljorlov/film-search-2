@@ -4,24 +4,32 @@ import sandwichClose from '../svg/sandwichClose.svg'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { Sidebar } from './Sidebar'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
+import { useEffect } from 'react'
+import { FC } from 'react'
 
-
-export const Header = () => {
+interface HeaderProps {
+  url: string
+}
+export const Header: FC<HeaderProps> = ({url}) => {
 
   const [sidebarToggle, setSidebarToggle] = useState(false)
+
+  useEffect(() => {
+    setSidebarToggle(false)
+  }, [url])
+
   const handleToggleSidebar = () => {
     setSidebarToggle(!sidebarToggle)
   }
   
-
   return (
-    <HeaderComponent onClick={handleToggleSidebar}>
+    <HeaderComponent>
       <Nav>
         <motion.img 
           src={sidebarToggle ? sandwichClose : sandwich} 
           height='30px' alt="toggle sidebar" 
-          // onClick={() => setSidebarToggle(!sidebarToggle)}
+          onClick={handleToggleSidebar}
         />
       </Nav>
       <Sidebar sidebarToggle={sidebarToggle} />
@@ -29,19 +37,15 @@ export const Header = () => {
   )
 }
 
-
-
-
 const HeaderComponent = styled(motion.div)`
   display: flex;
   background-color: #C4C4C4;
   color: white;
   position: fixed;
   width: 100%;
-  min-height: 3rem;
+  height: 3rem;
   z-index: 10;
 `
-
 const Nav = styled(motion.nav)`
   display: flex;
   align-items: center;

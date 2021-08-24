@@ -1,31 +1,33 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import noPerson from '../../svg/noPerson.svg'
+import { FilmType } from '../../actions/TopRatedFilms/TopRatedFilmsActionTypes'
 
 
-interface FilmProps {
-  title: string,
-  vote_average: number,
-  poster_path: string,
-  release_date: string
+interface PersonProps {
+  name: string,
+  profile_path: string,
+  known_for?: FilmType[],
+  id: number
 }
 
-export const Film: FC<FilmProps> = ({title, vote_average, poster_path, release_date}) => {
+export const Person: FC<PersonProps> = ({name, profile_path, id}) => {
 
   const [isHovered, setIsHovered] = useState(false)
-  const cardAnimation = {}
-  
+  const history = useHistory()
 
   return (
-    <StyledFilm
+    <StyledPerson
       transition={{duration: 0.05}}
       whileHover={{ scale: 1.025 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => history.push(`/person/${id}`)}
     >
-      <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt="poster"/>
+      <img src={profile_path ? `https://image.tmdb.org/t/p/w300${profile_path}` : noPerson} alt="poster"/>
       <CardBg 
         initial={
           { height: 0 }
@@ -45,17 +47,10 @@ export const Film: FC<FilmProps> = ({title, vote_average, poster_path, release_d
             color: `${isHovered ? 'white' : '#333'}`
           }}
         >
-          {title}
+          {name}
         </motion.h5>
-        <motion.p
-          style={{
-            color: `${isHovered ? 'white' : '#333'}`
-          }}
-        >
-          {vote_average}/10
-        </motion.p>
       </Description>
-    </StyledFilm>
+    </StyledPerson>
   )
 }
 
@@ -67,7 +62,7 @@ const CardBg = styled(motion.div)`
 `
 
 
-const StyledFilm = styled(motion.div)`
+const StyledPerson = styled(motion.div)`
   border-radius: 1rem;
   z-index: 5;
   cursor: pointer;
@@ -86,6 +81,7 @@ const StyledFilm = styled(motion.div)`
     border-radius: 0.5rem;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
     z-index: 10;
+    /* max-height: 19rem; */
   }
   p{
     font-size: smaller;

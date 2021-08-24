@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes"
 import { GetTopRatedFilms } from "../actions/TopRatedFilms/TopRatedFilmsActions"
-import { Film } from "../components/Film"
+import { Film } from "../components/cards/Film"
 import { Pagination } from "../components/Pagination"
 import { RootStore } from "../Store"
 import { FilmsList, Films } from "./Home"
@@ -32,12 +32,13 @@ export const TopRated = () => {
     <>
       { topRatedFilms &&
         <>
-          <FilmsList>
+          <FilmsList className='page'>
             <h2>Top Rated: </h2>
             <Films>
               {topRatedFilms?.results.map((film:FilmType) => (
                 <Film 
                   key={film.id}
+                  id={film.id}
                   title={film.title}
                   vote_average={film.vote_average}
                   poster_path={film.poster_path}
@@ -46,7 +47,7 @@ export const TopRated = () => {
               ))}
             </Films>
           </FilmsList>
-          <Pagination currentPage={currentPage} totalPages={totalPages} filtration={'top-rated'}/>
+          <Pagination currentPage={currentPage} totalPages={totalPages} filtration={'top_rated'}/>
         </>
       }
     </>

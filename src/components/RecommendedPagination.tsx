@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -9,9 +9,11 @@ interface PaginationProps {
   currentPage: number | undefined
   totalPages: number | undefined
   filtration: string
+  filmId: number
+  top: number
 }
 
-export const Pagination: FC<PaginationProps> = ({currentPage, totalPages, filtration}) => {
+export const RecommendedPagination: FC<PaginationProps> = ({ top, currentPage, totalPages, filtration, filmId}) => {
   
 
   const windowsNumber = Math.ceil(totalPages! / 10)
@@ -23,10 +25,17 @@ export const Pagination: FC<PaginationProps> = ({currentPage, totalPages, filtra
         break
       }
       paginationWindows[paginationWindows.length-1].push(page + window*10)
-
     }
   }
-  
+
+  const scroll = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
+
   const [currentWindow, setCurrentWindow] = useState((currentPage!%10 !== 0) ? Math.floor(currentPage!/10) : Math.floor(currentPage!/10)-1)
 
   const handlePreviousClick = () => {
@@ -44,12 +53,11 @@ export const Pagination: FC<PaginationProps> = ({currentPage, totalPages, filtra
     <PaginationContainer className='pagination'>
         <PaginationClicker onClick={handlePreviousClick}>&lt;</PaginationClicker>
         {paginationWindows[currentWindow].map((page: number) => (
-          <Link key={uuid()} to={`/${filtration}/${page}`}>
+          <Link key={uuid()} to={`/${filtration}/${filmId}/${page}`} onClick={() => scroll()}>
             {currentPage === page
             ? <SelectedLinkContainer> {page} </SelectedLinkContainer>
             : <LinkContainer> {page} </LinkContainer>
           }
-
           </Link>
         ))}
         <PaginationClicker onClick={handleNextClick}>&gt;</PaginationClicker>
@@ -67,6 +75,7 @@ const PaginationContainer = styled(motion.nav)`
 const PaginationClicker = styled(motion.div)`
   cursor: pointer;
   margin: 0rem 0.5rem;
+  cursor: pointer;
 `
 
 const LinkContainer = styled(motion.div)`

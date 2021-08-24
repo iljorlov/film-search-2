@@ -39,7 +39,7 @@ const GlobalStyles = createGlobalStyle`
     }
     p{
         font-size: 1rem;
-        line-height: 200%;
+        line-height: 150%;
         color: #696969;
     }
     a{
@@ -56,6 +56,7 @@ const GlobalStyles = createGlobalStyle`
     li{
       list-style: none;
     }
+    
 `;
 
 export default GlobalStyles;

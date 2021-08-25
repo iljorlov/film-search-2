@@ -47,7 +47,8 @@ export const FilmPage = () => {
             <FilmIntroCentered>
               <FilmName>{data[pathFilmId].title}</FilmName>
               <SubnameInfo>
-                {data[pathFilmId].release_date.split("-")[0]}
+                {/* {data[pathFilmId].release_date.split("-")[0]} */}
+                {data[pathFilmId].release_date}
               </SubnameInfo>
               <Tagline>{data![pathFilmId].tagline}</Tagline>
             </FilmIntroCentered>
@@ -209,16 +210,16 @@ const RatingContainer = styled.div`
 const Tagline = styled.div`
   font-size: 1rem;
   font-weight: 400;
-  padding: 0.3rem 0rem;
 `;
 
 const GenresContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 0.5rem 0rem 1rem 0rem;
   @media (min-width: 768px) {
-    width: 100%auto;
+    max-width: 20rem;
   }
 `;
 
@@ -226,6 +227,7 @@ const Genre = styled.div`
   color: #e0dede;
   background-color: #333;
   padding: 0.5rem;
+  font-size: 1rem;
   border: 1px solid transparent;
   margin: 0.25rem 0.5rem;
   border-radius: 1rem;
@@ -265,6 +267,7 @@ const SubnameInfo = styled(motion.div)`
   font-size: 1rem;
   font-weight: 500;
   opacity: 0.7;
+  margin: 0.5rem 0rem;
 `;
 
 const FilmIntro = styled.div`

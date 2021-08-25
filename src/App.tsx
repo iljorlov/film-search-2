@@ -32,7 +32,7 @@ function App() {
           exact
           component={FilmPage}
         ></Route>
-        <Route path={"/tv/:tvId"} exact component={TVPage}></Route>
+        <Route path={"/tv/:tvId/:pageNumber"} exact component={TVPage}></Route>
         <Route path={"/popular/:pageNumber"} exact component={Home}></Route>
         <Route path={"/top_rated/:pageNumber"} exact component={TopRated} />
         <Route

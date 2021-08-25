@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import noPoster from "../../svg/noPoster.svg";
 
@@ -22,7 +22,6 @@ export const TV: FC<TVProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const history = useHistory();
-  const cardAnimation = {};
 
   return (
     <StyledFilm
@@ -30,7 +29,7 @@ export const TV: FC<TVProps> = ({
       whileHover={{ scale: 1.025 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => history.push(`/tv/${id}`)}
+      onClick={() => history.push(`/tv/${id}/1`)}
     >
       <img
         src={

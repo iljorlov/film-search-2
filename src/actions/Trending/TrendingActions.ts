@@ -46,7 +46,7 @@ export const GetTrendingPeople =
       });
 
       const res = await axios.get(
-        `https://api.themoviedb.org/3/trending/person/${timespan}?api_key=${api_key}&page=${page}`
+        `https://api.themoviedb.org/3/person/popular?api_key=${api_key}&page=${page}`
       );
 
       dispatch({
@@ -61,7 +61,7 @@ export const GetTrendingPeople =
   };
 
 export const GetTrendingTV =
-  (page: number = 1, timespan: string = "week") =>
+  (page: number = 1, timespan: string = "day") =>
   async (dispatch: Dispatch) => {
     try {
       dispatch({

@@ -18,10 +18,7 @@ export type IndividualTVType = {
   episode_run_time: [number];
   first_air_date: string;
   homepage: string;
-  genres: {
-    id: number;
-    name: string;
-  };
+  genres: [genre];
   id: number;
   languages: [string];
   last_air_date: string;
@@ -45,6 +42,7 @@ export type IndividualTVType = {
   credits: {
     cast: [CastType];
     crew: [CrewType];
+    id: number;
   };
   images: {
     backdrops: [ImageType];
@@ -60,6 +58,11 @@ export type IndividualTVType = {
     total_results: number;
     results: [TvType];
   };
+};
+
+export type genre = {
+  id: number;
+  name: string;
 };
 
 export type Video = {

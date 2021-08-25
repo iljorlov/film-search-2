@@ -6,6 +6,7 @@ import { GetPosters } from "../actions/IndividualFilm/ImagesActions";
 import { RootStore } from "../Store";
 import prev from "../svg/prev.svg";
 import next from "../svg/next.svg";
+import noPoster from "../svg/noPoster.svg";
 
 interface PosterSliderProps {
   pathFilmId: number;
@@ -36,7 +37,11 @@ export const PosterSlider: FC<PosterSliderProps> = ({
       <Poster>
         <img
           key={altPosterPath}
-          src={`https://image.tmdb.org/t/p/w500${altPosterPath}`}
+          src={
+            altPosterPath
+              ? `https://image.tmdb.org/t/p/w500${altPosterPath}`
+              : noPoster
+          }
           alt="poster"
         />
       </Poster>

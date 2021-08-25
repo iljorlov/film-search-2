@@ -29,9 +29,6 @@ export const TrendingTV = () => {
     (state: RootStore) => state.trendingTV.trendingTV?.total_pages
   );
 
-  // const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
-  // const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
-
   return (
     <>
       {trendingTV && (

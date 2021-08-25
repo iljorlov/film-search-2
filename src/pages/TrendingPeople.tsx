@@ -7,6 +7,7 @@ import { Pagination } from "../components/Pagination";
 import { Person } from "../components/cards/Person";
 import { RootStore } from "../Store";
 import { FilmsList, Films } from "./Home";
+import { Loader } from "../components/Loader";
 
 export const TrendingPeople = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const TrendingPeople = () => {
 
   useEffect(() => {
     dispatch(GetTrendingPeople(pathCurrentPage));
+    window.scrollTo(0, 0);
   }, [dispatch, pathCurrentPage]);
 
   const trendingPeople = useSelector(
@@ -27,32 +29,38 @@ export const TrendingPeople = () => {
   const totalPages = useSelector(
     (state: RootStore) => state.trendingPeople.trendingPersons?.total_pages
   );
-
-  // const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
-  // const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
+  const trendingPeopleLoading = useSelector(
+    (state: RootStore) => state.trendingPeople.loading
+  );
 
   return (
     <>
-      {trendingPeople && (
+      {trendingPeopleLoading ? (
+        <Loader />
+      ) : (
         <>
-          <FilmsList className="page">
-            <h2>Trending People: </h2>
-            <Films>
-              {trendingPeople?.results.map((person: PersonType) => (
-                <Person
-                  key={person.id}
-                  name={person.name}
-                  profile_path={person.profile_path}
-                  id={person.id}
-                />
-              ))}
-            </Films>
-          </FilmsList>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            filtration={"trending_people"}
-          />
+          {trendingPeople && (
+            <>
+              <FilmsList className="page">
+                <h2>Trending People: </h2>
+                <Films>
+                  {trendingPeople?.results.map((person: PersonType) => (
+                    <Person
+                      key={person.id}
+                      name={person.name}
+                      profile_path={person.profile_path}
+                      id={person.id}
+                    />
+                  ))}
+                </Films>
+              </FilmsList>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                filtration={"trending_people"}
+              />
+            </>
+          )}
         </>
       )}
     </>

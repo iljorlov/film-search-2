@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { GetIndividualTV } from "../actions/IndividualTV/IndividualTVActions";
 import { CastSlider } from "../components/CastSlider";
+import { Loader } from "../components/Loader";
 import { NoRecommendations } from "../components/NoRecommendations";
 import { PosterSlider } from "../components/PosterSlider";
 import { RecommendedFilms } from "../components/RecommendedFilms";
@@ -18,80 +19,96 @@ export const TVPage = () => {
   const pathTVId = parseInt(location.pathname.split("/")[2]);
   const pathPageId = parseInt(location.pathname.split("/")[3]);
 
+  const loading = useSelector((state: RootStore) => state.individualTV.loading);
   const data = useSelector((state: RootStore) => state.individualTV.data);
 
   useEffect(() => {
     dispatch(GetIndividualTV(pathTVId, pathPageId));
+    window.scrollTo(0, 0);
   }, [dispatch, pathTVId, pathPageId]);
 
   return (
     <>
-      <TVContainer>
-        {data && data![pathTVId] && (
-          <>
-            <TVHeader>
-              <TVName>{data[pathTVId].name}</TVName>
-              <SubnameInfo>
-                {data[pathTVId].first_air_date.split("-")[0]}
-                {data[pathTVId].next_episode_to_air
-                  ? ` - ${
-                      data[pathTVId].next_episode_to_air.air_date.split("-")[0]
-                    }`
-                  : ""}
-              </SubnameInfo>
-              <Tagline>{data[pathTVId].tagline}</Tagline>
-            </TVHeader>
-            <TVBody>
-              <TVLeft>
-                <PosterSlider
-                  pathFilmId={pathTVId}
-                  altPosterPath={data[pathTVId].poster_path}
-                />
-                <RatingDuration>
-                  <RatingContainer>
-                    <div className="rating">
-                      <img src={star} alt="star" />
-                      <div>
-                        <b>{data![pathTVId].vote_average}</b>/10
+      {loading ? (
+        <Loader />
+      ) : (
+        <TVContainer>
+          {data && data![pathTVId] && (
+            <>
+              <TVHeader>
+                <TVName>{data[pathTVId].name}</TVName>
+                <SubnameInfo>
+                  {data[pathTVId].first_air_date.split("-")[0]}
+                  {data[pathTVId].next_episode_to_air
+                    ? ` - ${
+                        data[pathTVId].next_episode_to_air.air_date.split(
+                          "-"
+                        )[0]
+                      }`
+                    : ""}
+                </SubnameInfo>
+                <Tagline>{data[pathTVId].tagline}</Tagline>
+              </TVHeader>
+              <TVBody>
+                <TVLeft>
+                  <PosterSlider
+                    pathFilmId={pathTVId}
+                    altPosterPath={data[pathTVId].poster_path}
+                  />
+                  <RatingDuration>
+                    <RatingContainer>
+                      <div className="rating">
+                        <img src={star} alt="star" />
+                        <div>
+                          <b>{data![pathTVId].vote_average}</b>/10
+                        </div>
                       </div>
-                    </div>
-                    <div className="votes">
-                      ({data![pathTVId].vote_count} total votes)
-                    </div>
-                  </RatingContainer>
-                  <Duration>
-                    <Seasons>
-                      {data![pathTVId].number_of_seasons === 1
-                        ? `${data![pathTVId].number_of_seasons} season`
-                        : `${data![pathTVId].number_of_seasons} seasons`}
-                    </Seasons>
-                    <Episodes>
-                      ({data![pathTVId].number_of_episodes} episodes)
-                    </Episodes>
-                  </Duration>
-                </RatingDuration>
-                <GenresContainer>
-                  {data![pathTVId].genres.map((genre) => (
-                    <Genre>{genre.name}</Genre>
-                  ))}
-                </GenresContainer>
-              </TVLeft>
+                      <div className="votes">
+                        ({data![pathTVId].vote_count} total votes)
+                      </div>
+                    </RatingContainer>
+                    <Duration>
+                      <Seasons>
+                        {data![pathTVId].number_of_seasons === 1
+                          ? `${data![pathTVId].number_of_seasons} season`
+                          : `${data![pathTVId].number_of_seasons} seasons`}
+                      </Seasons>
+                      <Episodes>
+                        ({data![pathTVId].number_of_episodes} episodes)
+                      </Episodes>
+                    </Duration>
+                  </RatingDuration>
+                  <GenresContainer>
+                    {data![pathTVId].genres.map((genre) => (
+                      <Genre>{genre.name}</Genre>
+                    ))}
+                  </GenresContainer>
+                </TVLeft>
 
-              <TVRight>
-                <OverviewContainer>
-                  <HeaderDiv>Overview:</HeaderDiv>
-                  {data![pathTVId].overview ? (
-                    <TVDescription>{data![pathTVId].overview}</TVDescription>
+                <TVRight>
+                  <OverviewContainer>
+                    <HeaderDiv>Overview:</HeaderDiv>
+                    {data![pathTVId].overview ? (
+                      <TVDescription>{data![pathTVId].overview}</TVDescription>
+                    ) : (
+                      <TVDescription>
+                        There is no information yet...
+                      </TVDescription>
+                    )}
+                  </OverviewContainer>
+                  <HeaderDiv>Cast:</HeaderDiv>
+                  {!_.isEmpty(data[pathTVId].credits.cast) ? (
+                    <CastSlider
+                      credits={data[pathTVId].credits}
+                      toggle={"cast"}
+                    />
                   ) : (
                     <TVDescription>
-                      There is no information yet...
+                      Unfortunately, we didn't find anything
                     </TVDescription>
                   )}
-                </OverviewContainer>
-                <HeaderDiv>Cast:</HeaderDiv>
-                <CastSlider credits={data[pathTVId].credits} toggle={"cast"} />
 
-                {/* {!_.isEmpty(data[pathTVId].credits.crew) && (
+                  {/* {!_.isEmpty(data[pathTVId].credits.crew) && (
                 <>
                   <HeaderDiv>Crew:</HeaderDiv>
                   <CastSlider
@@ -100,15 +117,22 @@ export const TVPage = () => {
                   />
                 </>
               )} */}
-              </TVRight>
-            </TVBody>
-          </>
-        )}
-      </TVContainer>
-      {data && data![pathTVId] && data![pathTVId].recommendations ? (
-        <RecommendedTVs />
+                </TVRight>
+              </TVBody>
+            </>
+          )}
+        </TVContainer>
+      )}
+      {loading ? (
+        <Loader />
       ) : (
-        <NoRecommendations />
+        <>
+          {data && data![pathTVId] && data![pathTVId].recommendations ? (
+            <RecommendedTVs />
+          ) : (
+            <NoRecommendations />
+          )}
+        </>
       )}
     </>
   );
@@ -156,7 +180,7 @@ const TVLeft = styled.div`
   width: 100%;
   padding: 1rem;
   @media (min-width: 768px) {
-    width: 50%;
+    width: 40%;
     margin: 0rem 4rem;
     margin-right: 1rem;
   }
@@ -169,7 +193,7 @@ const TVRight = styled.div`
   width: 100%;
   padding: 1rem;
   @media (min-width: 768px) {
-    width: 50%;
+    width: 60%;
     margin: 0rem 3rem 0 0;
   }
 `;
@@ -281,6 +305,7 @@ const TVDescription = styled.div`
   text-align: justify;
   line-height: 1.5rem;
   margin-top: 1rem;
+  width: 100%;
   opacity: 0.8;
   border-left: 2px solid #333;
   padding: 0rem 1rem;

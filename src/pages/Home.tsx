@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
 import { Pagination } from "../components/Pagination";
 import { useLocation } from "react-router-dom";
+import { Loader } from "../components/Loader";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(GetPopularFilms(pathCurrentPage));
+    window.scrollTo(0, 0);
   }, [dispatch, pathCurrentPage]);
 
   const popularFilms = useSelector(
@@ -29,31 +31,40 @@ export const Home = () => {
   const totalPages = useSelector(
     (state: RootStore) => state.popularFilms.popular?.total_pages
   );
+  const popularLoading = useSelector(
+    (state: RootStore) => state.popularFilms.loading
+  );
 
   return (
     <>
-      {popularFilms && currentPage && totalPages && (
+      {popularLoading ? (
+        <Loader />
+      ) : (
         <>
-          <FilmsList className="page">
-            <h2>Popular: </h2>
-            <Films>
-              {popularFilms?.results.map((film: FilmType) => (
-                <Film
-                  key={film.id}
-                  id={film.id}
-                  title={film.title}
-                  vote_average={film.vote_average}
-                  poster_path={film.poster_path}
-                  release_date={film.release_date}
-                />
-              ))}
-            </Films>
-          </FilmsList>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            filtration={"popular"}
-          />
+          {popularFilms && currentPage && totalPages && (
+            <>
+              <FilmsList className="page">
+                <h2>Popular: </h2>
+                <Films>
+                  {popularFilms?.results.map((film: FilmType) => (
+                    <Film
+                      key={film.id}
+                      id={film.id}
+                      title={film.title}
+                      vote_average={film.vote_average}
+                      poster_path={film.poster_path}
+                      release_date={film.release_date}
+                    />
+                  ))}
+                </Films>
+              </FilmsList>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                filtration={"popular"}
+              />
+            </>
+          )}
         </>
       )}
     </>

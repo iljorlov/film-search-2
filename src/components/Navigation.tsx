@@ -18,6 +18,23 @@ export const Header: FC<HeaderProps> = ({ url }) => {
     setSidebarToggle(false);
   }, [url]);
 
+  const handleClick = (event: any) => {
+    if (event.target.id !== "sidebar") {
+      setSidebarToggle(false);
+    }
+  };
+
+  // to disable sidebar when clicked outside it
+  useEffect(() => {
+    if (sidebarToggle === true) {
+      const body = document.querySelector("body");
+      body?.addEventListener("click", handleClick);
+      return () => {
+        body?.removeEventListener("click", handleClick);
+      };
+    }
+  }, [sidebarToggle]);
+
   const handleToggleSidebar = () => {
     setSidebarToggle(!sidebarToggle);
   };

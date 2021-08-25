@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const NoRecommendations = () => {
-  return <NoRecContainer>No recommendations, sorry</NoRecContainer>;
+  return <NoRecContainer>No recommendations found</NoRecContainer>;
 };
 
 const NoRecContainer = styled.div`

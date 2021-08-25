@@ -39,14 +39,7 @@ export const TV: FC<TVProps> = ({
         }
         alt="poster"
       />
-      <CardBg
-        initial={{ height: 0 }}
-        animate={{
-          height: isHovered ? "50%" : "0%",
-          bottom: isHovered ? "0rem" : "10rem",
-        }}
-        transition={{ duration: 0.2 }}
-      />
+      <CardBg className="card-bg" />
       <Description className="description">
         <motion.h5
           style={{
@@ -72,6 +65,9 @@ const CardBg = styled(motion.div)`
   background-color: #333;
   position: absolute;
   border-radius: 0.5rem;
+  height: 1%;
+  top: 10px;
+  transition: all 0.2s ease;
 `;
 
 const StyledFilm = styled(motion.div)`
@@ -84,8 +80,12 @@ const StyledFilm = styled(motion.div)`
   background-color: transparent;
   align-items: center;
   transition: all 0.1s ease-in;
+
   &:hover {
     transform: scale(1.25);
+    .card-bg {
+      height: 100%;
+    }
   }
   img {
     width: 100%;

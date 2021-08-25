@@ -13,6 +13,7 @@ import star from "../svg/star.svg";
 import { GetCredits } from "../actions/IndividualFilm/CreditsActions";
 import { CastSlider } from "../components/CastSlider";
 import { RecommendedFilms } from "../components/RecommendedFilms";
+import { Loader } from "../components/Loader";
 
 export const FilmPage = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ export const FilmPage = () => {
     dispatch(GetIndividualFilm(pathFilmId));
     dispatch(GetPosters(pathFilmId));
     dispatch(GetCredits(pathFilmId));
+    window.scrollTo(0, 0);
   }, [dispatch, pathFilmId]);
 
   const getHours = (mins: number) => {
@@ -34,86 +36,95 @@ export const FilmPage = () => {
   const data = useSelector((state: RootStore) => state.individualFilms.data!);
   const posters = useSelector((state: RootStore) => state.posters.data);
   const credits = useSelector((state: RootStore) => state.credits.data);
+  const loadingFilms = useSelector(
+    (state: RootStore) => state.individualFilms.loading
+  );
 
   return (
     <>
-      {data &&
-        data![pathFilmId] &&
-        posters &&
-        posters![pathFilmId] &&
-        credits &&
-        credits![pathFilmId] && (
-          <MainSection>
-            <FilmIntroCentered>
-              <FilmName>{data[pathFilmId].title}</FilmName>
-              <SubnameInfo>
-                {/* {data[pathFilmId].release_date.split("-")[0]} */}
-                {data[pathFilmId].release_date}
-              </SubnameInfo>
-              <Tagline>{data![pathFilmId].tagline}</Tagline>
-            </FilmIntroCentered>
-            <FilmDiv>
-              <LeftInfo>
-                <FilmIntro>
+      {loadingFilms ? (
+        <Loader />
+      ) : (
+        <>
+          {data &&
+            data![pathFilmId] &&
+            posters &&
+            posters![pathFilmId] &&
+            credits &&
+            credits![pathFilmId] && (
+              <MainSection>
+                <FilmIntroCentered>
                   <FilmName>{data[pathFilmId].title}</FilmName>
                   <SubnameInfo>
-                    {data[pathFilmId].release_date.split("-")[0]}
+                    {/* {data[pathFilmId].release_date.split("-")[0]} */}
+                    {data[pathFilmId].release_date}
                   </SubnameInfo>
                   <Tagline>{data![pathFilmId].tagline}</Tagline>
-                </FilmIntro>
+                </FilmIntroCentered>
+                <FilmDiv>
+                  <LeftInfo>
+                    <FilmIntro>
+                      <FilmName>{data[pathFilmId].title}</FilmName>
+                      <SubnameInfo>
+                        {data[pathFilmId].release_date.split("-")[0]}
+                      </SubnameInfo>
+                      <Tagline>{data![pathFilmId].tagline}</Tagline>
+                    </FilmIntro>
 
-                <Media>
-                  {!_.isEmpty(data![pathFilmId].poster_path) ? (
-                    <PosterSlider
-                      pathFilmId={pathFilmId}
-                      altPosterPath={data![pathFilmId].poster_path}
-                    />
-                  ) : (
-                    <img src={noPoster} alt="poster" />
-                  )}
+                    <Media>
+                      {!_.isEmpty(data![pathFilmId].poster_path) ? (
+                        <PosterSlider
+                          pathFilmId={pathFilmId}
+                          altPosterPath={data![pathFilmId].poster_path}
+                        />
+                      ) : (
+                        <img src={noPoster} alt="poster" />
+                      )}
 
-                  {/* <VideoWrapper>
+                      {/* <VideoWrapper>
                 <iframe width="560" height="349" src={`https://www.youtube.com/embed/PLl99DlL6b4?modestbranding=1&showinfo=0&rel=0&`} frameBorder='0' allowFullScreen></iframe>
               </VideoWrapper> */}
-                </Media>
-                <RatingDuration>
-                  <RatingContainer>
-                    <div className="rating">
-                      <img src={star} alt="star" />
-                      <div>
-                        <b>{data![pathFilmId].vote_average}</b>/10
-                      </div>
-                    </div>
-                    <div className="votes">
-                      ({data![pathFilmId].vote_count} total votes)
-                    </div>
-                  </RatingContainer>
-                  <SubnameInfo>
-                    {getHours(data[pathFilmId].runtime)}
-                  </SubnameInfo>
-                </RatingDuration>
-                <GenresContainer>
-                  {data![pathFilmId].genres.map((genre) => (
-                    <Genre>{genre.name}</Genre>
-                  ))}
-                </GenresContainer>
-              </LeftInfo>
+                    </Media>
+                    <RatingDuration>
+                      <RatingContainer>
+                        <div className="rating">
+                          <img src={star} alt="star" />
+                          <div>
+                            <b>{data![pathFilmId].vote_average}</b>/10
+                          </div>
+                        </div>
+                        <div className="votes">
+                          ({data![pathFilmId].vote_count} total votes)
+                        </div>
+                      </RatingContainer>
+                      <SubnameInfo>
+                        {getHours(data[pathFilmId].runtime)}
+                      </SubnameInfo>
+                    </RatingDuration>
+                    <GenresContainer>
+                      {data![pathFilmId].genres.map((genre) => (
+                        <Genre>{genre.name}</Genre>
+                      ))}
+                    </GenresContainer>
+                  </LeftInfo>
 
-              <RightInfo>
-                <div>
-                  <HeaderDiv>Overview:</HeaderDiv>
-                  <FilmDescription>
-                    {data![pathFilmId].overview}
-                  </FilmDescription>
-                </div>
-                <HeaderDiv>Cast:</HeaderDiv>
-                <CastSlider credits={credits[pathFilmId]} toggle={"cast"} />
-                <HeaderDiv>Crew:</HeaderDiv>
-                <CastSlider credits={credits[pathFilmId]} toggle={"crew"} />
-              </RightInfo>
-            </FilmDiv>
-          </MainSection>
-        )}
+                  <RightInfo>
+                    <div>
+                      <HeaderDiv>Overview:</HeaderDiv>
+                      <FilmDescription>
+                        {data![pathFilmId].overview}
+                      </FilmDescription>
+                    </div>
+                    <HeaderDiv>Cast:</HeaderDiv>
+                    <CastSlider credits={credits[pathFilmId]} toggle={"cast"} />
+                    <HeaderDiv>Crew:</HeaderDiv>
+                    <CastSlider credits={credits[pathFilmId]} toggle={"crew"} />
+                  </RightInfo>
+                </FilmDiv>
+              </MainSection>
+            )}
+        </>
+      )}
       <RecommendedFilms />
     </>
   );
@@ -141,7 +152,7 @@ const LeftInfo = styled.div`
   align-items: center;
   width: 100%;
   @media (min-width: 768px) {
-    width: 50%;
+    width: 40%;
     margin: 0rem 4rem;
     margin-right: 1rem;
   }
@@ -153,7 +164,7 @@ const RightInfo = styled.div`
   align-items: center;
   width: 100%;
   @media (min-width: 768px) {
-    width: 50%;
+    width: 60%;
     margin: 0.5rem 3rem 0 0;
   }
 `;
@@ -274,12 +285,14 @@ const FilmIntro = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-bottom: 1rem;
   @media (min-width: 768px) {
     display: none;
   }
 `;
 const FilmIntroCentered = styled.div`
   display: none;
+  margin-bottom: 1rem;
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;

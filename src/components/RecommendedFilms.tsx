@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { GetRecommendedFilms } from "../actions/IndividualFilm/RecommendedFilmsActions";
 import { NoRecommendations } from "./NoRecommendations";
 import { RecommendedPagination } from "./RecommendedPagination";
+import { Loader } from "./Loader";
 
 export const RecommendedFilms = () => {
   const dispatch = useDispatch();
@@ -30,49 +31,61 @@ export const RecommendedFilms = () => {
     (state: RootStore) => state.recommendedFilms.data
   );
 
+  const loadingRecs = useSelector(
+    (state: RootStore) => state.recommendedFilms.loading
+  );
+
   return (
     <>
-      {recommendedFilms && recommendedFilms[pathFilmIndex] && (
+      {loadingRecs ? (
+        <Loader />
+      ) : (
         <>
-          <FilmsList className="page">
-            <h2 id="recommended" ref={recommendedRef}>
-              Recommended:
-            </h2>
-            {recommendedFilms![pathFilmIndex].total_pages > 0 ? (
-              <Films>
-                {recommendedFilms[pathFilmIndex].results.map(
-                  (film: FilmType, index) => {
-                    if (index === 20) {
-                      return "";
-                    } else {
-                      return (
-                        <Film
-                          key={film.id}
-                          id={film.id}
-                          title={film.title}
-                          vote_average={Math.round(film.vote_average * 10) / 10}
-                          poster_path={film.poster_path}
-                          release_date={film.release_date}
-                        />
-                      );
-                    }
-                  }
+          {recommendedFilms && recommendedFilms[pathFilmIndex] && (
+            <>
+              <FilmsList className="page">
+                <h2 id="recommended" ref={recommendedRef}>
+                  Recommended:
+                </h2>
+                {recommendedFilms![pathFilmIndex].total_pages > 0 ? (
+                  <Films>
+                    {recommendedFilms[pathFilmIndex].results.map(
+                      (film: FilmType, index) => {
+                        if (index === 20) {
+                          return "";
+                        } else {
+                          return (
+                            <Film
+                              key={film.id}
+                              id={film.id}
+                              title={film.title}
+                              vote_average={
+                                Math.round(film.vote_average * 10) / 10
+                              }
+                              poster_path={film.poster_path}
+                              release_date={film.release_date}
+                            />
+                          );
+                        }
+                      }
+                    )}
+                  </Films>
+                ) : (
+                  <NoRecommendations />
                 )}
-              </Films>
-            ) : (
-              <NoRecommendations />
-            )}
-          </FilmsList>
-          {recommendedFilms![pathFilmIndex].total_pages > 0 ? (
-            <RecommendedPagination
-              top={top}
-              currentPage={recommendedFilms[pathFilmIndex].page}
-              totalPages={recommendedFilms[pathFilmIndex].total_pages}
-              filtration={"film"}
-              filmId={pathFilmIndex}
-            />
-          ) : (
-            ""
+              </FilmsList>
+              {recommendedFilms![pathFilmIndex].total_pages > 0 ? (
+                <RecommendedPagination
+                  top={top}
+                  currentPage={recommendedFilms[pathFilmIndex].page}
+                  totalPages={recommendedFilms[pathFilmIndex].total_pages}
+                  filtration={"film"}
+                  filmId={pathFilmIndex}
+                />
+              ) : (
+                ""
+              )}
+            </>
           )}
         </>
       )}

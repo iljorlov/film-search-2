@@ -56,6 +56,13 @@ const GlobalStyles = createGlobalStyle`
     li{
       list-style: none;
     }
+
+    .selected-role{
+        background-color: #C4C4C4;
+    }
+    .non-selected-role{
+        background-color: white;
+    }
     
 `;
 

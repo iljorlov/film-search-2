@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
 import { GetTopRatedFilms } from "../actions/TopRatedFilms/TopRatedFilmsActions";
 import { Film } from "../components/cards/Film";
+import { Loader } from "../components/Loader";
 import { Pagination } from "../components/Pagination";
 import { RootStore } from "../Store";
 import { FilmsList, Films } from "./Home";
@@ -16,6 +17,7 @@ export const TopRated = () => {
 
   useEffect(() => {
     dispatch(GetTopRatedFilms(pathCurrentPage));
+    window.scrollTo(0, 0);
   }, [dispatch, pathCurrentPage]);
 
   const topRatedFilms = useSelector(
@@ -27,34 +29,40 @@ export const TopRated = () => {
   const totalPages = useSelector(
     (state: RootStore) => state.topRatedFilms.topRated?.total_pages
   );
-
-  // const currentPage = useSelector((state: RootStore) => state.popularFilms.popular?.page)
-  // const totalPages = useSelector((state: RootStore) => state.popularFilms.popular?.total_pages)
+  const topLoading = useSelector(
+    (state: RootStore) => state.topRatedFilms.loading
+  );
 
   return (
     <>
-      {topRatedFilms && (
+      {topLoading ? (
+        <Loader />
+      ) : (
         <>
-          <FilmsList className="page">
-            <h2>Top Rated: </h2>
-            <Films>
-              {topRatedFilms?.results.map((film: FilmType) => (
-                <Film
-                  key={film.id}
-                  id={film.id}
-                  title={film.title}
-                  vote_average={film.vote_average}
-                  poster_path={film.poster_path}
-                  release_date={film.release_date}
-                />
-              ))}
-            </Films>
-          </FilmsList>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            filtration={"top_rated"}
-          />
+          {topRatedFilms && (
+            <>
+              <FilmsList className="page">
+                <h2>Top Rated: </h2>
+                <Films>
+                  {topRatedFilms?.results.map((film: FilmType) => (
+                    <Film
+                      key={film.id}
+                      id={film.id}
+                      title={film.title}
+                      vote_average={film.vote_average}
+                      poster_path={film.poster_path}
+                      release_date={film.release_date}
+                    />
+                  ))}
+                </Films>
+              </FilmsList>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                filtration={"top_rated"}
+              />
+            </>
+          )}
         </>
       )}
     </>

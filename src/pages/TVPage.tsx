@@ -201,6 +201,7 @@ const TVBody = styled.div`
   flex-direction: column;
   @media (min-width: 768px) {
     flex-direction: row;
+    margin-left: 0.5rem;
   }
 `;
 

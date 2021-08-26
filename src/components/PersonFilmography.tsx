@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootStore } from "../Store";
+import { FilmographyToShow } from "./FilmographyToShow";
 
 export const PersonFilmography = () => {
   const filmsData = useSelector(
@@ -12,7 +13,7 @@ export const PersonFilmography = () => {
     (state: RootStore) => state.individualPerson.personTVs.data
   );
 
-  const [selectedRole, setSelectedRole] = useState("actor");
+  const [selectedRole, setSelectedRole] = useState("cast");
   const [selectedArea, setSelectedArea] = useState("films");
 
   return (
@@ -24,7 +25,7 @@ export const PersonFilmography = () => {
             onClick={() => setSelectedArea("films")}
             transition={{ type: "tween", duration: 0.2 }}
             initial={{
-              width: "80%",
+              width: "60%",
             }}
             style={{
               backgroundColor: `${
@@ -33,17 +34,10 @@ export const PersonFilmography = () => {
               fontWeight: `${selectedArea === "films" ? "normal" : "lighter"}`,
             }}
             animate={{
-              // backgroundColor: `${
-              //   selectedArea === "films" ? "#b4b2b2" : "white"
-              // }`,
               width: `${selectedArea === "films" ? "60%" : "40%"}`,
-
               borderTopRightRadius: `${
                 selectedArea === "films" ? "0.75rem" : "0%"
               }`,
-              // borderBottomRightRadius: `${
-              //   selectedArea === "films" ? "0.75rem" : "0%"
-              // }`,
             }}
           >
             Films
@@ -53,7 +47,7 @@ export const PersonFilmography = () => {
             onClick={() => setSelectedArea("tvs")}
             transition={{ type: "tween", duration: 0.2 }}
             initial={{
-              width: "80%",
+              width: "40%",
             }}
             style={{
               backgroundColor: `${
@@ -62,17 +56,10 @@ export const PersonFilmography = () => {
               fontWeight: `${selectedArea === "tvs" ? "normal" : "lighter"}`,
             }}
             animate={{
-              // backgroundColor: `${
-              //   selectedArea === "tvs" ? "#b4b2b2" : "white"
-              // }`,
               width: `${selectedArea === "tvs" ? "60%" : "40%"}`,
-
               borderTopLeftRadius: `${
                 selectedArea === "tvs" ? "0.75rem" : "0%"
               }`,
-              // borderBottomLeftRadius: `${
-              //   selectedArea === "tvs" ? "0.75rem" : "0%"
-              // }`,
             }}
           >
             TV Series
@@ -80,26 +67,22 @@ export const PersonFilmography = () => {
         </FilmTVSelection>
         <RoleSelection>
           <ActorSelect
-            id="actor"
-            onClick={() => setSelectedRole("actor")}
+            id="cast"
+            onClick={() => setSelectedRole("cast")}
             transition={{ type: "tween", duration: 0.2 }}
             initial={{
-              width: "80%",
+              width: "60%",
             }}
             style={{
               backgroundColor: `${
-                selectedRole === "actor" ? "#c4c4c4" : "white"
+                selectedRole === "cast" ? "#c4c4c4" : "white"
               }`,
-              fontWeight: `${selectedRole === "actor" ? "normal" : "lighter"}`,
+              fontWeight: `${selectedRole === "cast" ? "normal" : "lighter"}`,
             }}
             animate={{
-              width: `${selectedRole === "actor" ? "60%" : "40%"}`,
-
-              // borderTopRightRadius: `${
-              //   selectedRole === "actor" ? "0.75rem" : "0%"
-              // }`,
+              width: `${selectedRole === "cast" ? "60%" : "40%"}`,
               borderBottomRightRadius: `${
-                selectedRole === "actor" ? "0.75rem" : "0%"
+                selectedRole === "cast" ? "0.75rem" : "0%"
               }`,
             }}
           >
@@ -110,7 +93,7 @@ export const PersonFilmography = () => {
             onClick={() => setSelectedRole("crew")}
             transition={{ type: "tween", duration: 0.2 }}
             initial={{
-              width: "20%",
+              width: "40%",
             }}
             style={{
               backgroundColor: `${
@@ -120,10 +103,6 @@ export const PersonFilmography = () => {
             }}
             animate={{
               width: `${selectedRole === "crew" ? "60%" : "40%"}`,
-
-              // borderTopLeftRadius: `${
-              //   selectedRole === "crew" ? "0.75rem" : "0%"
-              // }`,
               borderBottomLeftRadius: `${
                 selectedRole === "crew" ? "0.75rem" : "0%"
               }`,
@@ -133,6 +112,7 @@ export const PersonFilmography = () => {
           </CrewSelect>
         </RoleSelection>
       </SelectionContainer>
+      <FilmographyToShow roleType={selectedRole} mediaType={selectedArea} />
     </PersonFilmographyContainer>
   );
 };
@@ -159,14 +139,10 @@ const ActorSelect = styled(motion.div)`
 `;
 
 const RoleSelection = styled(motion.div)`
-  top: 0;
-  left: 0;
   display: flex;
   width: 100%;
 `;
 const FilmTVSelection = styled(motion.div)`
-  top: 0;
-  left: 0;
   display: flex;
   width: 100%;
 `;
@@ -182,7 +158,9 @@ const SelectionContainer = styled(motion.div)`
 `;
 
 const PersonFilmographyContainer = styled.div`
-  margin: 2rem 1rem;
+  margin: 2rem 2rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

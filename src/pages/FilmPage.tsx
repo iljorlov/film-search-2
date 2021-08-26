@@ -117,8 +117,21 @@ export const FilmPage = () => {
                     </div>
                     <HeaderDiv>Cast:</HeaderDiv>
                     <CastSlider credits={credits[pathFilmId]} toggle={"cast"} />
-                    <HeaderDiv>Crew:</HeaderDiv>
-                    <CastSlider credits={credits[pathFilmId]} toggle={"crew"} />
+                    {
+                      !_.isEmpty(
+                        credits[pathFilmId].crew ? (
+                          <>
+                            <HeaderDiv>Crew:</HeaderDiv>
+                            <CastSlider
+                              credits={credits[pathFilmId]}
+                              toggle={"crew"}
+                            />
+                          </>
+                        ) : (
+                          <></>
+                        )
+                      )
+                    }
                   </RightInfo>
                 </FilmDiv>
               </MainSection>

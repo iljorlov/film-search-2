@@ -1,3 +1,10 @@
+# Приложение для поиска фильмов с пагинацией и рекомендациями.
+
+Демо: https://iljorlov-film-search.herokuapp.com/
+
+Использованные технологии: TypeScript, React, Redux, StyledComponents
+API: https://developers.themoviedb.org/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

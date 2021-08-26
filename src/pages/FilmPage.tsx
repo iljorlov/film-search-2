@@ -151,6 +151,7 @@ const LeftInfo = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
   @media (min-width: 768px) {
     width: 40%;
     margin: 0rem 4rem;
@@ -163,6 +164,7 @@ const RightInfo = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 1rem;
   @media (min-width: 768px) {
     width: 60%;
     margin: 0.5rem 3rem 0 0;
@@ -302,7 +304,6 @@ const FilmIntroCentered = styled.div`
 
 export const MainSection = styled(motion.div)`
   padding: 4rem 1rem;
-  min-height: 100vh;
 `;
 
 export const FilmDiv = styled(motion.div)`

@@ -9,6 +9,7 @@ import { TV } from "../components/cards/TV";
 import { RootStore } from "../Store";
 import { FilmsList, Films } from "./Home";
 import { Loader } from "../components/Loader";
+import styled from "styled-components";
 
 export const TrendingTV = () => {
   const dispatch = useDispatch();
@@ -42,8 +43,8 @@ export const TrendingTV = () => {
         <>
           {trendingTV && (
             <>
+              <PageHeader>Trending TV Shows: </PageHeader>
               <FilmsList className="page">
-                <h2>Trending TV Shows: </h2>
                 <Films>
                   {trendingTV?.results.map((tv: TvType) => (
                     <TV
@@ -69,3 +70,9 @@ export const TrendingTV = () => {
     </>
   );
 };
+
+const PageHeader = styled.h2`
+  padding: 5rem 2rem 2rem 2rem;
+  text-align: left;
+  width: 100%;
+`;

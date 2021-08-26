@@ -8,6 +8,7 @@ import { Person } from "../components/cards/Person";
 import { RootStore } from "../Store";
 import { FilmsList, Films } from "./Home";
 import { Loader } from "../components/Loader";
+import styled from "styled-components";
 
 export const TrendingPeople = () => {
   const dispatch = useDispatch();
@@ -41,8 +42,8 @@ export const TrendingPeople = () => {
         <>
           {trendingPeople && (
             <>
+              <PageHeader>Trending People: </PageHeader>
               <FilmsList className="page">
-                <h2>Trending People: </h2>
                 <Films>
                   {trendingPeople?.results.map((person: PersonType) => (
                     <Person
@@ -66,3 +67,9 @@ export const TrendingPeople = () => {
     </>
   );
 };
+
+const PageHeader = styled.h2`
+  padding: 5rem 2rem 2rem 2rem;
+  text-align: left;
+  width: 100%;
+`;

@@ -67,26 +67,31 @@ const PaginationContainer = styled(motion.nav)`
   justify-content: center;
   align-items: center;
   padding: 3rem 0rem;
+  width: 100%;
+  overflow: hidden;
 `;
 
 const PaginationClicker = styled(motion.div)`
   cursor: pointer;
-  margin: 0rem 0.5rem;
+  margin: 0rem 1rem;
 `;
 
 const LinkContainer = styled(motion.div)`
   margin: 1rem 0.5rem;
-  width: 2rem;
+  width: 1rem;
   text-align: center;
-  position: relative;
+  @media (max-width: 768px) {
+    width: 1rem;
+  }
 `;
 
 const SelectedLinkContainer = styled(motion.div)`
   margin: 1rem 0.5rem;
-  width: 2rem;
+  width: 1rem;
   text-align: center;
-  position: relative;
   color: #333;
   font-weight: bold;
   font-size: larger;
+  @media (max-width: 768px) {
+  }
 `;

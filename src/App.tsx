@@ -25,6 +25,9 @@ function App() {
       <GlobalStyles />
       <Header url={location.pathname} />
       <Switch>
+        <Route path={"/film-search-2/"} exact>
+          <Redirect to={"/popular/1"} />
+        </Route>
         <Route path={"/film/:filmId"} exact component={FilmPage}></Route>
         <Route path={"/person/:personId"} exact component={PersonPage}></Route>
         <Route

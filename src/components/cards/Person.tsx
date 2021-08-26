@@ -19,8 +19,8 @@ export const Person: FC<PersonProps> = ({ name, profile_path, id }) => {
 
   return (
     <StyledPerson
-      transition={{ duration: 0.05 }}
-      whileHover={{ scale: 1.025 }}
+      // transition={{ duration: 0.05 }}
+      // whileHover={{ scale: 1.025 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => history.push(`/person/${id}`)}
@@ -36,9 +36,9 @@ export const Person: FC<PersonProps> = ({ name, profile_path, id }) => {
       <CardBg className="card-bg" />
       <Description className="description">
         <motion.h5
-          style={{
-            color: `${isHovered ? "white" : "#333"}`,
-          }}
+        // style={{
+        //   color: `${isHovered ? "white" : "#333"}`,
+        // }}
         >
           {name}
         </motion.h5>
@@ -49,7 +49,7 @@ export const Person: FC<PersonProps> = ({ name, profile_path, id }) => {
 
 const CardBg = styled(motion.div)`
   width: calc(100% - 2px);
-  background-color: #333;
+  background-color: #606060;
   position: absolute;
   border-radius: 0.5rem;
   height: 1%;
@@ -66,11 +66,19 @@ const StyledPerson = styled(motion.div)`
   flex-direction: column;
   background-color: transparent;
   align-items: center;
+  /* justify-content: space-between; */
+
   transition: all 0.1s ease-in;
   &:hover {
-    transform: scale(1.25);
+    transform: scale(1.015);
     .card-bg {
       height: 100%;
+    }
+    h5 {
+      color: #e1e1e1;
+    }
+    p {
+      color: #d0d0d0;
     }
   }
   img {
@@ -96,4 +104,10 @@ const Description = styled(motion.div)`
   z-index: 10;
   max-height: 5rem;
   text-align: center;
+  /* h5 {
+    color: #e1e1e1;
+  }
+  p {
+    color: #d0d0d0;
+  } */
 `;

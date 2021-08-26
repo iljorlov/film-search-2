@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
 import { GetTrendingFilms } from "../actions/Trending/TrendingActions";
 import { Film } from "../components/cards/Film";
@@ -41,8 +42,8 @@ export const TrendingFilms = () => {
         <>
           {trendingFilms && (
             <>
+              <PageHeader>Trending Films: </PageHeader>
               <FilmsList className="page">
-                <h2>Trending Films: </h2>
                 <Films>
                   {trendingFilms?.results.map((film: FilmType) => (
                     <Film
@@ -68,3 +69,9 @@ export const TrendingFilms = () => {
     </>
   );
 };
+
+const PageHeader = styled.h2`
+  padding: 5rem 2rem 2rem 2rem;
+  text-align: left;
+  width: 100%;
+`;

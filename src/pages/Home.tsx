@@ -43,8 +43,8 @@ export const Home = () => {
         <>
           {popularFilms && currentPage && totalPages && (
             <>
+              <PageHeader>Popular: </PageHeader>
               <FilmsList className="page">
-                <h2>Popular: </h2>
                 <Films>
                   {popularFilms?.results.map((film: FilmType) => (
                     <Film
@@ -71,6 +71,12 @@ export const Home = () => {
   );
 };
 
+const PageHeader = styled.h2`
+  padding: 5rem 2rem 2rem 2rem;
+  text-align: left;
+  width: 100%;
+`;
+
 export const FilmsList = styled(motion.div)`
   padding: 2rem 5rem;
   h2 {
@@ -84,4 +90,7 @@ export const Films = styled(motion.div)`
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-column-gap: 2rem;
   grid-row-gap: 4rem;
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `;

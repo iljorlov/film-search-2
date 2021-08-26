@@ -138,22 +138,22 @@ export const PersonFilmography = () => {
 };
 
 const TVSelect = styled(motion.div)`
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
 `;
 const FilmSelect = styled(motion.div)`
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
 `;
 const CrewSelect = styled(motion.div)`
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
 `;
 const ActorSelect = styled(motion.div)`
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
 `;

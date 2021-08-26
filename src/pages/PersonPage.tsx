@@ -53,6 +53,12 @@ export const PersonPage = () => {
                 </PersonLeft>
                 <PersonRight>
                   <HeaderDiv>Biography:</HeaderDiv>
+
+                  {personData[pathPersonId].biography ? (
+                    <Biography>{personData[pathPersonId].biography}</Biography>
+                  ) : (
+                    <Biography>Biography not found</Biography>
+                  )}
                   <SubPhotoBio>
                     {personData[pathPersonId].birthday ? (
                       <BirthDate>{`Date of birth: ${personData[pathPersonId].birthday}`}</BirthDate>
@@ -75,11 +81,6 @@ export const PersonPage = () => {
                       <></>
                     )}
                   </SubPhotoBio>
-                  {personData[pathPersonId].biography ? (
-                    <Biography>{personData[pathPersonId].biography}</Biography>
-                  ) : (
-                    <Biography>No information found</Biography>
-                  )}
                 </PersonRight>
               </PersonBody>
               <PersonFilmography />
@@ -208,7 +209,7 @@ const PersonRight = styled.div`
   padding: 1rem;
   @media (min-width: 768px) {
     width: 60%;
-    margin: 0rem 3rem 0 0;
+    margin: 0.5rem 3rem 0 0;
   }
 `;
 

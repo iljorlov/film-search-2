@@ -181,8 +181,6 @@ const TVLeft = styled.div`
   padding: 1rem;
   @media (min-width: 768px) {
     width: 40%;
-    margin: 0rem 4rem;
-    margin-right: 1rem;
   }
 `;
 const TVRight = styled.div`
@@ -194,7 +192,7 @@ const TVRight = styled.div`
   padding: 1rem;
   @media (min-width: 768px) {
     width: 60%;
-    margin: 0rem 3rem 0 0;
+    margin: 0.5rem 3rem 0 0;
   }
 `;
 

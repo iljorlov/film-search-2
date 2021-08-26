@@ -17,6 +17,8 @@ export const SearchPage = () => {
   const pathSearchEntry = location.pathname.split("/")[2];
   const currentPage = Number(location.pathname.split("/")[3]);
 
+  // console.log(location.pathname.split("/")[1]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(GetFilmsList(pathSearchEntry, currentPage));

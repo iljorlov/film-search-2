@@ -27,7 +27,7 @@ function App() {
       <Header url={location.pathname} />
       <Switch>
         <Route
-          path={"/search/:entry/:pageNumber"}
+          path={"/search/:searchEntry/:pageNumber"}
           exact
           component={SearchPage}
         ></Route>

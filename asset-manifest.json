@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.js": "/film-search-2/static/js/main.d821a59b.chunk.js",
-    "main.js.map": "/film-search-2/static/js/main.d821a59b.chunk.js.map",
+    "main.js": "/film-search-2/static/js/main.db05e09a.chunk.js",
+    "main.js.map": "/film-search-2/static/js/main.db05e09a.chunk.js.map",
     "runtime-main.js": "/film-search-2/static/js/runtime-main.ce4f102b.js",
     "runtime-main.js.map": "/film-search-2/static/js/runtime-main.ce4f102b.js.map",
-    "static/js/2.292d919d.chunk.js": "/film-search-2/static/js/2.292d919d.chunk.js",
-    "static/js/2.292d919d.chunk.js.map": "/film-search-2/static/js/2.292d919d.chunk.js.map",
+    "static/js/2.195dd838.chunk.js": "/film-search-2/static/js/2.195dd838.chunk.js",
+    "static/js/2.195dd838.chunk.js.map": "/film-search-2/static/js/2.195dd838.chunk.js.map",
     "static/js/3.795dc09c.chunk.js": "/film-search-2/static/js/3.795dc09c.chunk.js",
     "static/js/3.795dc09c.chunk.js.map": "/film-search-2/static/js/3.795dc09c.chunk.js.map",
     "index.html": "/film-search-2/index.html",
-    "static/js/2.292d919d.chunk.js.LICENSE.txt": "/film-search-2/static/js/2.292d919d.chunk.js.LICENSE.txt",
+    "static/js/2.195dd838.chunk.js.LICENSE.txt": "/film-search-2/static/js/2.195dd838.chunk.js.LICENSE.txt",
+    "static/media/IMDb.022247d1.svg": "/film-search-2/static/media/IMDb.022247d1.svg",
+    "static/media/icons8-facebook.0aacd4a0.svg": "/film-search-2/static/media/icons8-facebook.0aacd4a0.svg",
+    "static/media/icons8-instagram-logo.5377a69a.svg": "/film-search-2/static/media/icons8-instagram-logo.5377a69a.svg",
+    "static/media/icons8-twitter.a453aad8.svg": "/film-search-2/static/media/icons8-twitter.a453aad8.svg",
+    "static/media/magnifier.a814ecab.svg": "/film-search-2/static/media/magnifier.a814ecab.svg",
     "static/media/noPerson.d2380efa.svg": "/film-search-2/static/media/noPerson.d2380efa.svg",
     "static/media/noPoster.4e9ffc2b.svg": "/film-search-2/static/media/noPoster.4e9ffc2b.svg",
     "static/media/sandwich.4ea57a5d.svg": "/film-search-2/static/media/sandwich.4ea57a5d.svg",
@@ -18,7 +23,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ce4f102b.js",
-    "static/js/2.292d919d.chunk.js",
-    "static/js/main.d821a59b.chunk.js"
+    "static/js/2.195dd838.chunk.js",
+    "static/js/main.db05e09a.chunk.js"
   ]
 }

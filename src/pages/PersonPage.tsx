@@ -11,6 +11,12 @@ import { RootStore } from "../Store";
 import { PosterSlider } from "../components/PosterSlider";
 import { Loader } from "../components/Loader";
 import { PersonFilmography } from "../components/PersonFilmography";
+import IMDbIcon from "../svg/IMDb.svg";
+import twitterIcon from "../svg/icons8-twitter.svg";
+import instagramIcon from "../svg/icons8-instagram-logo.svg";
+import facebookIcon from "../svg/icons8-facebook.svg";
+import _ from "lodash";
+import { LoaderSmall } from "../components/LoaderSmall";
 
 export const PersonPage = () => {
   const dispatch = useDispatch();
@@ -33,6 +39,10 @@ export const PersonPage = () => {
     (state: RootStore) => state.individualPerson.personData.loading
   );
 
+  const externalLinks = useSelector(
+    (state: RootStore) => state.individualPerson.personExternalIds
+  );
+
   return (
     <PersonContainer>
       {personLoading ? (
@@ -43,6 +53,11 @@ export const PersonPage = () => {
             <>
               <PersonHeader>
                 <PersonName>{personData[pathPersonId].name}</PersonName>
+                {personData[pathPersonId].birthday ? (
+                  <BirthDate>{personData[pathPersonId].birthday}</BirthDate>
+                ) : (
+                  <></>
+                )}
               </PersonHeader>
               <PersonBody>
                 <PersonLeft>
@@ -60,27 +75,90 @@ export const PersonPage = () => {
                     <Biography>Biography not found</Biography>
                   )}
                   <SubPhotoBio>
-                    {personData[pathPersonId].birthday ? (
-                      <BirthDate>{`Date of birth: ${personData[pathPersonId].birthday}`}</BirthDate>
-                    ) : (
-                      <></>
-                    )}
-
                     {personData[pathPersonId].place_of_birth ? (
-                      <BirthPlace>
-                        {`Place of birth: ${personData[pathPersonId].place_of_birth}`}
-                      </BirthPlace>
+                      <SubBioSection>
+                        <SubBioHeader>Place of birth:</SubBioHeader>
+                        <BirthPlace>
+                          {personData[pathPersonId].place_of_birth}
+                        </BirthPlace>
+                      </SubBioSection>
                     ) : (
                       <></>
                     )}
                     {personData[pathPersonId].known_for_department ? (
-                      <KnownFor>
-                        {`Known for: ${personData[pathPersonId].known_for_department}`}
-                      </KnownFor>
+                      <SubBioSection>
+                        <SubBioHeader>Known for:</SubBioHeader>
+                        <KnownFor>
+                          {personData[pathPersonId].known_for_department}
+                        </KnownFor>
+                      </SubBioSection>
                     ) : (
                       <></>
                     )}
                   </SubPhotoBio>
+                  <HeaderDiv style={{ marginTop: "2rem" }}>Links:</HeaderDiv>
+                  {externalLinks.data &&
+                  !_.isEmpty(externalLinks.data![pathPersonId]) ? (
+                    <>
+                      {externalLinks.loading ? (
+                        <LoaderSmall />
+                      ) : (
+                        <ExternalIDs>
+                          {externalLinks.data![pathPersonId].instagram_id ? (
+                            <ExternalLink
+                              href={`https://instagram.com/${
+                                externalLinks.data![pathPersonId].instagram_id
+                              }`}
+                              target="_blank"
+                            >
+                              <img src={instagramIcon} height="25px" alt="" />
+                            </ExternalLink>
+                          ) : (
+                            ""
+                          )}
+
+                          {externalLinks.data![pathPersonId].facebook_id ? (
+                            <ExternalLink
+                              href={`https://facebook.com/${
+                                externalLinks.data![pathPersonId].facebook_id
+                              }`}
+                              target="_blank"
+                            >
+                              <img src={facebookIcon} height="25px" alt="" />
+                            </ExternalLink>
+                          ) : (
+                            ""
+                          )}
+                          {externalLinks.data![pathPersonId].twitter_id ? (
+                            <ExternalLink
+                              href={`https://twitter.com/${
+                                externalLinks.data![pathPersonId].twitter_id
+                              }`}
+                              target="_blank"
+                            >
+                              <img src={twitterIcon} height="25px" alt="" />
+                            </ExternalLink>
+                          ) : (
+                            ""
+                          )}
+                          {externalLinks.data![pathPersonId].imdb_id ? (
+                            <ExternalLink
+                              href={`https://imdb.com/name/${
+                                externalLinks.data![pathPersonId].imdb_id
+                              }`}
+                              target="_blank"
+                            >
+                              <img src={IMDbIcon} height="25px" alt="" />
+                            </ExternalLink>
+                          ) : (
+                            ""
+                          )}
+                        </ExternalIDs>
+                      )}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </PersonRight>
               </PersonBody>
               <PersonFilmography />
@@ -92,37 +170,77 @@ export const PersonPage = () => {
   );
 };
 
+const ExternalLink = styled.a`
+  display: flex;
+  margin-right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-radius: 1rem;
+  &:hover {
+    transform: translateY(-5%);
+    background-color: #c4c4c4;
+  }
+  @media (max-width: 768px) {
+    width: 5rem;
+    height: 5rem;
+  }
+`;
+
+const ExternalIDs = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0rem 1rem;
+  border-left: 2px solid #333;
+`;
+
 const SubPhotoBio = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
   opacity: 0.8;
   margin-top: 1rem;
+  border-left: 2px solid #333; */
 `;
 const BirthDate = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: row;
   width: 100%;
   padding: 0rem 1rem;
-  margin: 1rem 0 0 0rem;
-  border-left: 2px solid #333;
+  margin: 0.5rem;
   @media (min-width: 768px) {
     max-width: 20rem;
   }
+  opacity: 0.8;
+`;
+
+const SubBioHeader = styled.div`
+  opacity: 1;
+  width: 15rem;
+`;
+
+const SubBioSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3rem;
+  padding: 0rem 1rem;
 `;
 const BirthPlace = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 0rem 1rem;
   justify-content: flex-start;
-  align-items: center;
-  margin: 1rem 0 0 0rem;
-  border-left: 2px solid #333;
+  align-items: flex-start;
   @media (min-width: 768px) {
     max-width: 20rem;
   }
@@ -131,11 +249,8 @@ const KnownFor = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 0rem 1rem;
   justify-content: flex-start;
-  align-items: center;
-  margin: 1rem 0 0 0rem;
-  border-left: 2px solid #333;
+  align-items: flex-start;
   @media (min-width: 768px) {
     max-width: 20rem;
   }

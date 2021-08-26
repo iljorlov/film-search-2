@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { IndividualPersonMovieCreditsType } from "../actions/IndividualPerson/PersonMovieCreditsActionTypes";
 import { Film } from "./cards/Film";
+import { PersonFilm } from "./cards/PersonFilm";
 import { LoaderSmall } from "./LoaderSmall";
 
 interface PersonFilmsI {
@@ -35,14 +36,17 @@ export const PersonFilms: FC<PersonFilmsI> = ({
             {roleType === "crew" ? (
               <CardsContainer>
                 {moviesData![pathPersonId].crew.map((film) => (
-                  <Film
-                    title={film.title}
-                    vote_average={film.vote_average}
-                    poster_path={film.poster_path}
-                    id={film.id}
-                    release_date={film.release_date}
-                    key={film.id}
-                  />
+                  <div style={{ maxWidth: "20rem" }}>
+                    <PersonFilm
+                      title={film.title}
+                      vote_average={film.vote_average}
+                      poster_path={film.poster_path}
+                      id={film.id}
+                      release_date={film.release_date}
+                      key={film.id}
+                      role={film.job}
+                    />
+                  </div>
                 ))}
               </CardsContainer>
             ) : (
@@ -70,7 +74,7 @@ export const PersonFilms: FC<PersonFilmsI> = ({
 
 const CardsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-column-gap: 2rem;
   grid-row-gap: 4rem;
   width: 100%;

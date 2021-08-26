@@ -9,8 +9,46 @@ export const INDIVIDUAL_PERSON_TV_CREDITS_SUCCESS =
 
 export type IndividualPersonTvCreditsType = {
   id: number;
-  cast: [TvType];
-  crew: [TvType];
+  cast: [TVPersonCast];
+  crew: [TVPersonCrew];
+};
+
+export type TVPersonCast = {
+  first_air_date: string;
+  name: string;
+  backdrop_path: string;
+  genre_ids: [number];
+  original_language: string;
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+  overview: string;
+  origin_country: [string];
+  original_name: string;
+  popularity: number;
+  character: string;
+  credit_id: string;
+  episode_count: string;
+};
+export type TVPersonCrew = {
+  first_air_date: string;
+  name: string;
+  backdrop_path: string;
+  genre_ids: [number];
+  original_language: string;
+  id: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+  overview: string;
+  origin_country: [string];
+  original_name: string;
+  popularity: number;
+  credit_id: string;
+  episode_count: string;
+  department: string;
+  job: string;
 };
 
 export interface IndividualPersonTvCreditsFail {

@@ -9,8 +9,47 @@ export const INDIVIDUAL_PERSON_MOVIE_CREDITS_SUCCESS =
 
 export type IndividualPersonMovieCreditsType = {
   id: number;
-  cast: [FilmType];
-  crew: [FilmType];
+  cast: [FilmPersonCast];
+  crew: [FilmPersonCrew];
+};
+
+export type FilmPersonCast = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: [number];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean; // !!!
+  vote_average: number;
+  vote_count: number;
+  popularity: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
+export type FilmPersonCrew = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: [number];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean; // !!!
+  vote_average: number;
+  vote_count: number;
+  popularity: number;
+  credit_id: string;
+  department: string;
+  job: string;
 };
 
 export interface IndividualPersonMovieCreditsFail {

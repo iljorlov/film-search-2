@@ -148,7 +148,6 @@ const FilmTVSelection = styled(motion.div)`
 `;
 
 const SelectionContainer = styled(motion.div)`
-  margin: 0.5rem;
   box-shadow: 2px 2px 10px #7676767f;
   border-radius: 1rem;
   overflow: hidden;
@@ -163,4 +162,6 @@ const PersonFilmographyContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 10px #7676767f;
+  border-radius: 1rem;
 `;

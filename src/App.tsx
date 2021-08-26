@@ -63,7 +63,7 @@ function App() {
         <Route exact path={"/"}>
           <Redirect to={"/popular/1"} />
         </Route>
-        {/* <Redirect to={"popular/1"} /> */}
+        <Redirect to={"popular/1"} />
       </Switch>
     </div>
   );

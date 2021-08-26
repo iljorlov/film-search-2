@@ -2,7 +2,7 @@
   "name": "film-search-2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://iljorlov.github.io/film-search-2",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

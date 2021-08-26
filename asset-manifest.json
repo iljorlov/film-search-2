@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/film-search-2/static/js/main.4ee0640f.chunk.js",
-    "main.js.map": "/film-search-2/static/js/main.4ee0640f.chunk.js.map",
+    "main.js": "/film-search-2/static/js/main.d821a59b.chunk.js",
+    "main.js.map": "/film-search-2/static/js/main.d821a59b.chunk.js.map",
     "runtime-main.js": "/film-search-2/static/js/runtime-main.ce4f102b.js",
     "runtime-main.js.map": "/film-search-2/static/js/runtime-main.ce4f102b.js.map",
     "static/js/2.292d919d.chunk.js": "/film-search-2/static/js/2.292d919d.chunk.js",
@@ -19,6 +19,6 @@
   "entrypoints": [
     "static/js/runtime-main.ce4f102b.js",
     "static/js/2.292d919d.chunk.js",
-    "static/js/main.4ee0640f.chunk.js"
+    "static/js/main.d821a59b.chunk.js"
   ]
 }

@@ -6,6 +6,7 @@ import { IndividualPersonTvCreditsType } from "../actions/IndividualPerson/Perso
 import { PersonTV } from "./cards/PersonTV";
 import { TV } from "./cards/TV";
 import { LoaderSmall } from "./LoaderSmall";
+import { NoFilmography } from "./NoFilmography";
 
 interface PersonTVsI {
   tvsDataLoading: boolean;
@@ -35,36 +36,48 @@ export const PersonTVs: FC<PersonTVsI> = ({
         ) : (
           <>
             {roleType === "crew" ? (
-              <CardsContainer>
-                {tvData![pathPersonId].crew.map((tv) => (
-                  <div style={{ maxWidth: "20rem" }}>
-                    <PersonTV
-                      name={tv.name}
-                      vote_average={tv.vote_average}
-                      poster_path={tv.poster_path}
-                      id={tv.id}
-                      first_air_date={tv.first_air_date}
-                      key={tv.id}
-                      role={tv.job}
-                    />
-                  </div>
-                ))}
-              </CardsContainer>
+              <>
+                {_.isEmpty(tvData![pathPersonId].crew) ? (
+                  <NoFilmography />
+                ) : (
+                  <CardsContainer>
+                    {tvData![pathPersonId].crew.map((tv) => (
+                      <div style={{ maxWidth: "20rem" }}>
+                        <PersonTV
+                          name={tv.name}
+                          vote_average={tv.vote_average}
+                          poster_path={tv.poster_path}
+                          id={tv.id}
+                          first_air_date={tv.first_air_date}
+                          key={tv.id}
+                          role={tv.job}
+                        />
+                      </div>
+                    ))}
+                  </CardsContainer>
+                )}
+              </>
             ) : (
-              <CardsContainer>
-                {tvData![pathPersonId].cast.map((tv) => (
-                  <div style={{ maxWidth: "20rem" }}>
-                    <TV
-                      name={tv.name}
-                      vote_average={tv.vote_average}
-                      poster_path={tv.poster_path}
-                      id={tv.id}
-                      first_air_date={tv.first_air_date}
-                      key={tv.id}
-                    />
-                  </div>
-                ))}
-              </CardsContainer>
+              <>
+                {_.isEmpty(tvData![pathPersonId].cast) ? (
+                  <NoFilmography />
+                ) : (
+                  <CardsContainer>
+                    {tvData![pathPersonId].cast.map((tv) => (
+                      <div style={{ maxWidth: "20rem" }}>
+                        <TV
+                          name={tv.name}
+                          vote_average={tv.vote_average}
+                          poster_path={tv.poster_path}
+                          id={tv.id}
+                          first_air_date={tv.first_air_date}
+                          key={tv.id}
+                        />
+                      </div>
+                    ))}
+                  </CardsContainer>
+                )}
+              </>
             )}
           </>
         )}

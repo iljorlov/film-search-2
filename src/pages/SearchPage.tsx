@@ -1,52 +1,44 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { GetPopularFilms } from "../actions/PopularFilms/PopularFilmsActions";
 import { Film } from "../components/cards/Film";
 import { RootStore } from "../Store";
 import { motion } from "framer-motion";
-import { FilmType } from "../actions/PopularFilms/PopularFilmsActionTypes";
+import { FilmType } from "../actions/Search/SearchActionTypes";
 import { Pagination } from "../components/Pagination";
 import { useLocation } from "react-router-dom";
 import { Loader } from "../components/Loader";
+import { GetFilmsList } from "../actions/Search/SearchActions";
 
-export const Home = () => {
+export const SearchPage = () => {
   const dispatch = useDispatch();
 
-  // get current page number to pass into Pagination container and to dispatch
   const location = useLocation();
-  const pathCurrentPage = parseInt(location.pathname.split("/")[2]);
+  const pathSearchEntry = location.pathname.split("/")[2];
+  const currentPage = Number(location.pathname.split("/")[3]);
 
   useEffect(() => {
-    dispatch(GetPopularFilms(pathCurrentPage));
     window.scrollTo(0, 0);
-  }, [dispatch, pathCurrentPage]);
+    dispatch(GetFilmsList(pathSearchEntry, currentPage));
+  }, [dispatch, pathSearchEntry, currentPage]);
 
-  const popularFilms = useSelector(
-    (state: RootStore) => state.popularFilms.popular
-  );
-  const currentPage = useSelector(
-    (state: RootStore) => state.popularFilms.popular?.page
-  );
-  const totalPages = useSelector(
-    (state: RootStore) => state.popularFilms.popular?.total_pages
-  );
-  const popularLoading = useSelector(
-    (state: RootStore) => state.popularFilms.loading
+  const data = useSelector((state: RootStore) => state.searchData.films.data);
+  const dataLoading = useSelector(
+    (state: RootStore) => state.searchData.films.loading
   );
 
   return (
     <>
-      {popularLoading ? (
+      <PageHeader>Search results: </PageHeader>
+      {dataLoading ? (
         <Loader />
       ) : (
         <>
-          {popularFilms && currentPage && totalPages && (
+          {data && data.results && currentPage <= data.total_pages && (
             <>
-              <PageHeader>Popular: </PageHeader>
-              <FilmsList className="page">
+              <FilmsList>
                 <Films>
-                  {popularFilms?.results.map((film: FilmType) => (
+                  {data.results.map((film: FilmType) => (
                     <Film
                       key={film.id}
                       id={film.id}
@@ -60,8 +52,8 @@ export const Home = () => {
               </FilmsList>
               <Pagination
                 currentPage={currentPage}
-                totalPages={totalPages}
-                filtration={"popular"}
+                totalPages={data.total_pages}
+                filtration={`search/${pathSearchEntry}`}
               />
             </>
           )}

@@ -43,20 +43,8 @@ export const PersonTV: FC<PersonTVProps> = ({
       />
       <CardBg className="card-bg" />
       <Description className="description">
-        <motion.h5
-        // style={{
-        //   color: `${isHovered ? "white" : "#333"}`,
-        // }}
-        >
-          {name}
-        </motion.h5>
-        <motion.p
-        // style={{
-        //   color: `${isHovered ? "white" : "#333"}`,
-        // }}
-        >
-          {vote_average}/10
-        </motion.p>
+        <motion.h5>{name}</motion.h5>
+        <motion.p>{vote_average}/10</motion.p>
         <p>{`(as ${role})`}</p>
       </Description>
     </StyledFilm>
@@ -82,10 +70,7 @@ const StyledFilm = styled(motion.div)`
   flex-direction: column;
   background-color: transparent;
   align-items: center;
-  /* justify-content: space-between; */
-
   transition: all 0.1s ease-in;
-
   &:hover {
     transform: scale(1.015);
     .card-bg {
@@ -104,7 +89,6 @@ const StyledFilm = styled(motion.div)`
     border-radius: 0.5rem;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
     z-index: 10;
-    /* max-height: 19rem; */
   }
   p {
     font-size: smaller;
@@ -121,10 +105,4 @@ const Description = styled(motion.div)`
   z-index: 10;
   max-height: 5rem;
   text-align: center;
-  /* h5 {
-    color: #e1e1e1;
-  }
-  p {
-    color: #d0d0d0;
-  } */
 `;

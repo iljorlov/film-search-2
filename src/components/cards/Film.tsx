@@ -81,7 +81,6 @@ const StyledFilm = styled(motion.div)`
   flex-direction: column;
   background-color: transparent;
   align-items: center;
-  /* justify-content: space-between; */
   transition: all 0.1s ease;
   &:hover {
     transform: scale(1.015);
@@ -118,10 +117,4 @@ const Description = styled(motion.div)`
   z-index: 10;
   max-height: 5rem;
   text-align: center;
-  /* h5 {
-    color: #e1e1e1;
-  }
-  p {
-    color: #d0d0d0;
-  } */
 `;

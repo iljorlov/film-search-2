@@ -16,6 +16,7 @@ import { TrendingTV } from "./pages/TrendingTV";
 import { FilmPage } from "./pages/FilmPage";
 import { PersonPage } from "./pages/PersonPage";
 import { TVPage } from "./pages/TVPage";
+import { SearchPage } from "./pages/SearchPage";
 
 function App() {
   const location = useLocation();
@@ -25,9 +26,11 @@ function App() {
       <GlobalStyles />
       <Header url={location.pathname} />
       <Switch>
-        <Route path={"/film-search-2/"} exact>
-          <Redirect to={"/popular/1"} />
-        </Route>
+        <Route
+          path={"/search/:entry/:pageNumber"}
+          exact
+          component={SearchPage}
+        ></Route>
         <Route path={"/film/:filmId"} exact component={FilmPage}></Route>
         <Route path={"/person/:personId"} exact component={PersonPage}></Route>
         <Route
@@ -54,9 +57,13 @@ function App() {
           component={TrendingTV}
         />
         <Route path={"/upcoming/:pageNumber"} exact component={Upcoming} />
+        <Route path={"/film-search-2/"} exact>
+          <Redirect to={"/popular/1"} />
+        </Route>
         <Route exact path={"/"}>
           <Redirect to={"/popular/1"} />
         </Route>
+        {/* <Redirect to={"popular/1"} /> */}
       </Switch>
     </div>
   );

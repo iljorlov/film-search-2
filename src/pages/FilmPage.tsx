@@ -14,6 +14,7 @@ import { GetCredits } from "../actions/IndividualFilm/CreditsActions";
 import { CastSlider } from "../components/CastSlider";
 import { RecommendedFilms } from "../components/RecommendedFilms";
 import { Loader } from "../components/Loader";
+import { v4 as uuid } from "uuid";
 
 export const FilmPage = () => {
   const location = useLocation();
@@ -103,7 +104,7 @@ export const FilmPage = () => {
                     </RatingDuration>
                     <GenresContainer>
                       {data![pathFilmId].genres.map((genre) => (
-                        <Genre>{genre.name}</Genre>
+                        <Genre key={uuid()}>{genre.name}</Genre>
                       ))}
                     </GenresContainer>
                   </LeftInfo>

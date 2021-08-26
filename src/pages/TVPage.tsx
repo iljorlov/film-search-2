@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -8,10 +8,10 @@ import { CastSlider } from "../components/CastSlider";
 import { Loader } from "../components/Loader";
 import { NoRecommendations } from "../components/NoRecommendations";
 import { PosterSlider } from "../components/PosterSlider";
-import { RecommendedFilms } from "../components/RecommendedFilms";
 import { RecommendedTVs } from "../components/RecommendedTVs";
 import { RootStore } from "../Store";
 import star from "../svg/star.svg";
+import { v4 as uuidv4 } from "uuid";
 
 export const TVPage = () => {
   const dispatch = useDispatch();
@@ -80,7 +80,7 @@ export const TVPage = () => {
                   </RatingDuration>
                   <GenresContainer>
                     {data![pathTVId].genres.map((genre) => (
-                      <Genre>{genre.name}</Genre>
+                      <Genre key={uuidv4()}>{genre.name}</Genre>
                     ))}
                   </GenresContainer>
                 </TVLeft>

@@ -6,6 +6,7 @@ import RootPersonReducer from "./IndividualPersonReducers/RootPersonReducer";
 import individualTVReducer from "./IndividualTVReducers/IndividualTVReducer";
 import popularFilmsReducer from "./PopularFilmsReducer";
 import recommendedFilmsReducer from "./RecommendedFilmsReducer";
+import RootSearchReducer from "./SearchReducers/RootSearchReducer";
 import topRatedFilmsReducer from "./TopRatedFilmsReduces";
 import trendingFilmsReducer from "./TrendingFilmsReducer";
 import trendingPersonReducer from "./TrendingPersonReducer";
@@ -25,6 +26,7 @@ const RootReducer = combineReducers({
   recommendedFilms: recommendedFilmsReducer,
   individualPerson: RootPersonReducer,
   individualTV: individualTVReducer,
+  searchData: RootSearchReducer,
 });
 
 export default RootReducer;

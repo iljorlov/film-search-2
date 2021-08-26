@@ -6,6 +6,7 @@ import {
   CrewType,
 } from "../actions/IndividualFilm/CreditsActionTypes";
 import noPerson from "../svg/noPerson.svg";
+import { v4 as uuidv4 } from "uuid";
 
 interface CastSliderI {
   credits: CreditsType;
@@ -18,7 +19,10 @@ export const CastSlider: FC<CastSliderI> = ({ credits, toggle }) => {
 
   const renderCast = () => {
     return credits.cast.map((person) => (
-      <SliderPhoto onClick={() => history.push(`/person/${person.id}`)}>
+      <SliderPhoto
+        key={uuidv4()}
+        onClick={() => history.push(`/person/${person.id}`)}
+      >
         <img
           src={
             person.profile_path
@@ -38,7 +42,10 @@ export const CastSlider: FC<CastSliderI> = ({ credits, toggle }) => {
       if (!crewIds.includes(person.id)) {
         crewIds.push(person.id);
         return (
-          <SliderPhoto onClick={() => history.push(`/person/${person.id}`)}>
+          <SliderPhoto
+            key={uuidv4()}
+            onClick={() => history.push(`/person/${person.id}`)}
+          >
             <img
               src={
                 person.profile_path
@@ -51,6 +58,8 @@ export const CastSlider: FC<CastSliderI> = ({ credits, toggle }) => {
             <div className="person-name">{person.name}</div>
           </SliderPhoto>
         );
+      } else {
+        return <></>;
       }
     });
   };

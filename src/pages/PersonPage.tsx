@@ -207,7 +207,7 @@ const SubPhotoBio = styled.div`
   flex-direction: column;
   opacity: 0.8;
   margin-top: 1rem;
-  border-left: 2px solid #333; */
+  border-left: 2px solid #333;
 `;
 const BirthDate = styled.div`
   display: flex;
@@ -217,10 +217,13 @@ const BirthDate = styled.div`
   width: 100%;
   padding: 0rem 1rem;
   margin: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.5rem 0rem;
+  opacity: 0.7;
   @media (min-width: 768px) {
     max-width: 20rem;
   }
-  opacity: 0.8;
 `;
 
 const SubBioHeader = styled.div`

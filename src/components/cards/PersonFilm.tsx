@@ -121,10 +121,4 @@ const Description = styled(motion.div)`
   z-index: 10;
   max-height: 5rem;
   text-align: center;
-  /* h5 {
-    color: #e1e1e1;
-  }
-  p {
-    color: #d0d0d0;
-  } */
 `;

@@ -63,11 +63,13 @@ const Poster = styled(motion.div)`
     height: inherit;
     border-radius: 1rem;
     height: auto;
-    width: 70vw;
+    width: 70vw; //
+    height: 105vw; // trying to prevent images from jumping
     object-fit: cover;
     border: 1px solid #e7e7e7;
     @media (min-width: 768px) {
       width: 20rem;
+      height: 30rem;
     }
   }
 `;

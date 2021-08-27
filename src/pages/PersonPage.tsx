@@ -293,7 +293,7 @@ const PersonContainer = styled.div`
 `;
 
 const PersonHeader = styled.div`
-  margin: 1rem 0rem;
+  margin: 1.5rem 0rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -303,6 +303,7 @@ const PersonHeader = styled.div`
 const PersonName = styled.div`
   font-size: 2rem;
   font-weight: 500;
+  text-align: center;
 `;
 
 const PersonLeft = styled.div`

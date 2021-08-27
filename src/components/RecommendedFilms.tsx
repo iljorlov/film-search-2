@@ -104,7 +104,7 @@ export const FilmsList = styled(motion.div)`
 export const Films = styled(motion.div)`
   min-height: 80vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   grid-column-gap: 2rem;
   grid-row-gap: 4rem;
 `;

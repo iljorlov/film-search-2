@@ -85,6 +85,7 @@ const StyledFilm = styled(motion.div)`
   }
   img {
     width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 0.5rem;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);

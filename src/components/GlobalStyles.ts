@@ -64,6 +64,7 @@ const GlobalStyles = createGlobalStyle`
         background-color: white;
     }
     
+    
 `;
 
 export default GlobalStyles;
